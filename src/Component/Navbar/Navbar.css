@@ -1,0 +1,20 @@
+.borderAnimation:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 0px;
+    background: transparent;
+    transition: width .5s ease, background-color .5s ease;
+  }
+  .borderAnimation:hover:after {
+    width: 100%;
+    background: black;
+  }
+
+ 
+  .Avatar:hover{
+    border:2px solid black;
+    cursor:pointer;
+  }
+  
