@@ -1,23 +1,27 @@
-import React,{useEffect,useRef,useState} from 'react'
-import {Box,Typography,ListItem,List,ListItemButton,ListItemText,Divider} from '@mui/material'
+import React,{useEffect,useRef,useState,useContext} from 'react'
+import {Box,ListItem,List,ListItemButton,ListItemText} from '@mui/material'
 import {Link,useNavigate} from "react-router-dom"
 import { useAuth } from '../../AuthContext'
 import { auth, db } from '../../firebase'
-import {collection, doc,getDoc} from 'firebase/firestore'
+import { doc,getDoc} from 'firebase/firestore'
+import {FormContext} from "../Context/DetailFormContext.js"
+
 
 const DropMenu = ({dropMenu,setDropMenu}) => {
-  const {Logout,currentUser} = useAuth();
+  const {Logout} = useAuth();
   const navigate = useNavigate();
-  const [presentUserType,setPresentUserType] =useState() ;
-  const docReference = doc(db,"user",auth.currentUser.uid)
+  const [presentUserType,setPresentUserType] =useState();
   
+      const {setshowEducationForm} = useContext(FormContext) 
+
   const ref =useRef();
 // !-----------------------AUTHENTICATION FUNCTION (LOGOUT)--------------------!
 
 async function logout(){
   try{
     await Logout();
-    navigate("/signup");
+    navigate("/");
+    setshowEducationForm(false);
   }
   catch(error)
   {
@@ -35,7 +39,7 @@ useEffect(() => {
 
   const getCurrentUser = async() =>{
   
-   const docSnap = await getDoc(docReference);
+   const docSnap = await getDoc(doc(db,"user",auth.currentUser.uid));
     setPresentUserType(docSnap.data().userType);
   }
 
@@ -45,8 +49,9 @@ useEffect(() => {
   return () => {
     // Cleanup the event listener
     document.removeEventListener("mousedown", checkIfClickedOutside);
+    setPresentUserType();
   };
-}, [dropMenu]);
+},[]);
 
 
 
@@ -65,8 +70,8 @@ return (
       
        <List>
           <ListItem  disablePadding={true}>
-            <Link to="/Profile"  style={{textDecoration:"none"}}>
-            <ListItemButton>
+            <Link to="/Profile"  style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
                <ListItemText primary="Profile" />
             </ListItemButton>
             </Link>
@@ -74,16 +79,16 @@ return (
 
 
           <ListItem  disablePadding={true}>
-            <Link to="/EditProfile"  style={{textDecoration:"none"}}>
-            <ListItemButton style={{width:'12.3rem'}}>
+            <Link to="/EditProfile"  style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
                <ListItemText primary="Edit Profile" style={{alignSelf:"center"}}/>
             </ListItemButton>
           </Link>
           </ListItem>
 
       {(localStorage.getItem("userType") === "Volunteer" || presentUserType==="Volunteer") && <ListItem disablePadding>
-            <Link to="/createSession"  style={{textDecoration:"none"}}>
-            <ListItemButton>
+            <Link to="/createSession"style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
                <ListItemText primary="Create a Session" />
             </ListItemButton>
           </Link>
@@ -91,8 +96,8 @@ return (
        }
 
            <ListItem  disablePadding={true}>
-          <Link to="/Aboutus"  style={{textDecoration:"none"}}>
-            <ListItemButton>
+          <Link to="/Aboutus"  style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
                <ListItemText primary="About us" />
             </ListItemButton>
           </Link>
@@ -102,7 +107,7 @@ return (
 
           <ListItem disablePadding>
             <ListItemButton onClick={logout}>
-               <ListItemText primary="Logout"  />
+               <ListItemText primary="Logout" style={{textAlign:"center"}} />
             </ListItemButton>
           </ListItem> 
         </List>

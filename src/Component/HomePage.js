@@ -1,10 +1,12 @@
 import React,{useState,useEffect} from 'react'
-import {Button,Box, Typography, Container} from '@mui/material'
+import {Button,Box, Typography} from '@mui/material'
 // import { useNavigate } from 'react-router-dom'
 // import {useDispatch} from "react-redux"
 import {db} from "../firebase"
+import "./Homepage.css"
 import { collection, getDocs} from 'firebase/firestore'
 import Navbar from './Navbar/Navbar'
+import BottomNavbar from "./Navbar/BottomNavbar/BottomNavbar"
 // import {OpenArticle} from './Reducers/ArticleReducer' 
 
 const HomePage = () => {
@@ -40,8 +42,6 @@ const HomePage = () => {
   getVideos();
 
   return () => {           // useEffect CleanUp function
-    getArticles();
-    getVideos();
     setVideos([]);
     setArticle([]);
   };
@@ -66,10 +66,10 @@ const HomePage = () => {
       }}>
       {
         article.map((item,index)=>(
-          <Box key={index}  margin={"1rem"} padding={"1rem"} bgcolor={"Lavender"} >
+          <Box key={index} className="content" margin={"1rem"} padding={"1rem"}  >
           <Box  display={"flex"} flexDirection={"column"} justifyContent={"center"} marginY={"2rem"}>
             <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
-            <img src={item.image} alt="Image" height={"100%"} width={"100%"}
+            <img src={item.image} alt="students" height={"100%"} width={"100%"}
              style={{objectFit:"fill"}} />
             </Box>
 
@@ -97,10 +97,10 @@ const HomePage = () => {
 }}>
 {
   videos.map((item,index)=>(
-    <Box key={index}  margin={"1rem"} padding={"1rem"} bgcolor={"Lavender"} >
+    <Box key={index}  className="content" margin={"1rem"} padding={"1rem"} marginBottom={"10rem"} >
     <Box  display={"flex"} flexDirection={"column"} justifyContent={"center"} marginY={"2rem"}>
       <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
-      <img src={item.piclink} alt="Image" height={"100%"} width={"100%"}
+      <img src={item.piclink} alt="alt" height={"100%"} width={"100%"}
        style={{objectFit:"fill"}} />
       </Box>
 
@@ -110,7 +110,7 @@ const HomePage = () => {
          
      
      <Button variant="contained" sx={{width:"40%",marginX:"auto"}}>
-     <a href={item.link} target="_blank" style={{textDecoration:"none",color:"white"}}>Go to Video</a> 
+     <a href={item.link} target="_blank" rel="noreferrer" style={{textDecoration:"none",color:"white"}}>Go to Video</a> 
      </Button>
 
       </Box>
@@ -118,6 +118,8 @@ const HomePage = () => {
   ))
 }
 </Box>
+
+ <BottomNavbar/>
     </div>
   )
 }

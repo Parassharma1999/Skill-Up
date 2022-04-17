@@ -1,0 +1,19 @@
+.bottomNavbar {
+  display:flex;
+  flex-direction: column;
+  height: 8rem;
+  border-top: 2px solid black;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.icon{
+  cursor: pointer;
+}
+
+.icon:hover{
+  transform: scale(1.1);
+  transition: all 0.1s linear;
+  color: rgb(72, 72, 193);
+}

@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './Navbar.css'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Box, Typography,Avatar } from "@mui/material";
-import { useAuth } from "../../AuthContext";
 import { auth } from "../../firebase"; 
 import DropMenu from '../Dropdown Menu/DropMenu'
-
 const Navbar = () => {
- const {currentUser} = useAuth();
  const [dropMenu, setDropMenu]=useState(false);
  
-
+//  useEffect(()=>{
+//    return ()=>{
+//    setDropMenu(false);
+//    }
+//  },[])
+ 
   return (
     <>
       <Box
         sx={{
           height: "4rem",
-          borderBottom: "3px solid black",
-          bgcolor: "lightblue",
+          // borderBottom: "3px solid black",
+          position:"fixed",
+          width:"100%",
+          zIndex:"100",
+          top:0,
+          backgroundColor: "rgba(255, 255, 255, 0.266)",
+          backdropFilter: "blur(10px)",
           display: "flex",
           justifyContent: "space-around",
           alignItems:"center",
@@ -27,7 +34,6 @@ const Navbar = () => {
         }}
       > 
       <Box className="Left" width={"30%"}>
-
       </Box>
 
       <Box className="Right" 
@@ -39,22 +45,26 @@ const Navbar = () => {
          
         }}> 
 
-        <Link to="/Homepage" style={{textDecoration:"none"}}>
-          <Typography className="borderAnimation" variant="h6" sx={{color:"black"}}>
+        <NavLink to="/Homepage" style={{textDecoration:"none"}} activeClassName="activeLink">
+          <Typography className="borderAnimation" variant="h6" 
+          // sx={{color:"black"}}
+          
+          >
             Home
           </Typography>
-        </Link>
+        </NavLink>
 
-        <Link to=""  style={{textDecoration:"none"}}>
+        <NavLink to="/Homepage/blogs"  style={{textDecoration:"none"}} activeClassName="activeLink">
           <Typography variant="h6"
           className="borderAnimation"
-           sx={{color:"black"}}>
+           sx={{color:"black"}}
+           >
              Blogs
           </Typography>
-        </Link>
+        </NavLink>
 
 
-        <Link to="" style={{textDecoration:"none"}}>
+        <NavLink to="/liveSessions" style={{textDecoration:"none"}} activeClassName="activeLink">
           <Typography variant="h6" 
           className="borderAnimation" 
           sx={{
@@ -63,11 +73,12 @@ const Navbar = () => {
            >
             Live Session
           </Typography>
-        </Link>
+        </NavLink>
 
 
         <Avatar className="Avatar" src={auth.currentUser.photoURL} sx={{border:"0.3px solid black"}} 
-        onClick={()=>{setDropMenu(!dropMenu)}} />
+        onClick={()=>{setDropMenu(!dropMenu)}}
+         />
       </Box>
       </Box>
         {dropMenu && <DropMenu dropMenu={dropMenu} setDropMenu={setDropMenu}/>}

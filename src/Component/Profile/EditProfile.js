@@ -1,7 +1,14 @@
 import React from 'react'
 import {FormControl,Box,Typography,TextField,Button} from '@mui/material'
+import {getDoc,collection,doc} from "firebase/firestore"
 import Navbar from '../Navbar/Navbar'
+
+
 const EditProfile = () => {
+ 
+  
+
+
   return (
       <>
     <Navbar/>

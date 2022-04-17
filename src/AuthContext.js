@@ -7,7 +7,8 @@ import {
   signInWithPopup,
   sendEmailVerification,
   sendSignInLinkToEmail,
-  signInWithEmailLink
+  signInWithEmailLink,
+  deleteUser
 } from "firebase/auth";
 import {auth,GoogleAuth,FacebookAuth} from './firebase'
 
@@ -49,6 +50,10 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
+  function deleteUsers(){
+      return deleteUser(auth.currentUser);
+  }
+
   function signInWithEmail(auth,email){
     return signInWithEmailLink(auth,email)
   }
@@ -71,6 +76,7 @@ useEffect(()=>{
     EmailVerification,
     sendEmailLink,
     signInWithEmail,
+    deleteUsers,
     loading,
     userType,
   };

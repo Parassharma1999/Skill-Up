@@ -1,0 +1,10 @@
+.content{
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 3px black;
+}
+
+.content:hover{
+    transform: scale(1.1);
+    transition: all 0.1s ease-in-out;
+}
+

@@ -1,0 +1,8 @@
+.icon:active{
+  color:blue;
+}
+
+.wrapper{
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 3px black;
+}

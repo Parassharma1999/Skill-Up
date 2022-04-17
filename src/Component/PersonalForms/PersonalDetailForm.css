@@ -1,0 +1,27 @@
+.personalDetailForm{
+    display: flex;
+    flex-direction: column;
+    width:90%;
+    height:100vh;
+    justify-content:space-between;
+    padding: 10px;
+    /* border: 2px solid black; */
+    /* box-shadow: inset 1px 1px 15px rgb(189, 187, 187); */
+}
+
+.formInput{
+    font-size:17px;
+    height: 30px;
+    outline: none;
+    margin:-10px 0;
+    /* border-top: none;
+    border-left: none;
+    border-right:none ; */
+    /* border-bottom:1px solid black; */
+    
+}
+
+.errorMessage{
+    color:red;
+    font-size:14px;
+}
