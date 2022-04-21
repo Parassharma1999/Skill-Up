@@ -15,7 +15,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "yup-phone";
-
+import personalForm from "../SVG/personalform.svg"
 const schema = yup.object().shape({
   // UserType: yup.string().required(),
   FullName:yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(),
@@ -100,12 +100,13 @@ const PersonalDetailForm = () => {
      <Box
      className="leftContainer"
      display={"flex"}
-     flex="1"
+     flex="0.5"
      >
-      HI
+      <img src={personalForm} alt="Form"   width="100%"/>
      </Box>
 
       <Box  
+          className="rightContainer"
         sx={{
           height: "95%",
           display: "flex",
@@ -113,11 +114,11 @@ const PersonalDetailForm = () => {
           justifyItems: "center",
           alignItems:"center",
           padding: "0.5rem 0 1rem 0",
-          boxShadow: 15,
-
+          boxShadow: 5,
+          borderRadius:"8px",
+          marginLeft:"20px"
         }}
-        flex={"0.7"}
-        className="rightContainer"
+        flex={"0.5"}
       >
         <Typography
           textAlign="center"

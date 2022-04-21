@@ -1,6 +1,8 @@
 import React, { useState, useEffect,useContext } from "react";
 import BottomNavbar from "../Navbar/BottomNavbar/BottomNavbar";
-import {FormContext} from "../Context/DetailFormContext.js.js" 
+import {FormContext} from "../Context/DetailFormContext.js.js"
+import { doc, getDoc, getDocs,setDoc } from "firebase/firestore";
+
 import "./EducationForm.css";
 import {
   FormControl,
@@ -9,12 +11,13 @@ import {
   Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "yup-phone";
+import study from "../SVG/Study.svg"
+
 
 
 const schema = yup.object().shape({
@@ -27,8 +30,10 @@ const schema = yup.object().shape({
 
 
 const EducationForm = () => {
-  const {setshowEducationalForm} = useContext(FormContext);
+  // const {setshowEducationalForm} = useContext(FormContext);
   const [error,setError] = useState(false)
+  const [info, setInfo] = useState([]);
+
   const navigate = useNavigate();
   // const docReference = doc(db,"user",currentUser.uid)
   const [educationalDetails, setEducationalDetails] = useState({
@@ -39,9 +44,25 @@ const EducationForm = () => {
     Achievement: "",
   });
 
-  const clickHandler = async (data) => {
+  useEffect(() => {
+    const getData = async () => {
+      const Data = await getDoc(doc(db, "user", auth.currentUser.uid));
+      setInfo(Data.data());
+    };
+    getData();
+
+  },[])
+
+ console.log(info)
+
+    const clickHandler = async (data) => {
       await setDoc(doc(db, "user", auth.currentUser.uid),data,{merge:true});
+
+      if(info.UserType === "Volunteer")
       navigate("/documentForm");
+      else
+      navigate("/HomePage");
+
   }; 
 
 
@@ -73,14 +94,15 @@ const EducationForm = () => {
     <Box 
     className="EduContainer"
     display={"flex"}
+    flexDirection="row-reverse"
     margin={"3rem"}
     >
 
       <Box 
        display={"flex"}
-       flex={1}
+       flex={0.5}
       >
-         hi
+      <img src={study} alt="Form" width="100%" style={{marginTop:"-100px"}}/>
       </Box>
 
     
@@ -94,9 +116,9 @@ const EducationForm = () => {
         flexDirection: "column",
         justifyItems: "center",
         padding: "0.5rem 0 1rem 0",
-        boxShadow: 15,
+        boxShadow: 5,
       }}
-      flex={0.7}
+      flex={0.5}
     >
       <Typography textAlign="center" style={{ marginBottom: "1rem",fontSize:"30px" }}>
         Educational Background

@@ -17,6 +17,7 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import document from "../SVG/certificate.svg"
 
 const schema = yup.object().shape({
   IDCardType: yup.string(),
@@ -93,8 +94,8 @@ const DocumentForm = () => {
 
   return (
     <Box display={"flex"} margin={"3rem"}>
-      <Box className="Left" display={"flex"} flex={1}>
-        HI
+      <Box className="Left" display={"flex"} flex={0.5}>
+      <img src={document}  alt="DocumentPic" width="80%" height={"80%"}/>
       </Box>
 
       <Box
@@ -108,7 +109,7 @@ const DocumentForm = () => {
           padding: "0.5rem 0 1rem 0",
           boxShadow: 15,
         }}
-        flex={0.7}
+        flex={0.5}
         className="Right"
       >
         <Typography
