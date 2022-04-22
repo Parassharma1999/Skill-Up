@@ -14,7 +14,8 @@
 
  
   .Avatar:hover{
-    border:2px solid black;
+    transform: scale(1.1);
+    transition: all 0.1s linear;
     cursor:pointer;
   }
   

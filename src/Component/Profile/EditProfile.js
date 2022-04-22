@@ -2,12 +2,22 @@ import React from 'react'
 import {FormControl,Box,Typography,TextField,Button} from '@mui/material'
 import {getDoc,collection,doc} from "firebase/firestore"
 import Navbar from '../Navbar/Navbar'
+import "yup-phone"
+import * as yup from "yup"
+import {yupResolver} from "@hookform/resolvers/yup"
+import {useForm} from "react-hook-form"
+
+
+const schema = yup.object().shape({
+  
+})
 
 
 const EditProfile = () => {
  
-  
-
+const {register,handleSubmit,formState:{errors}} = useForm({
+  resolver:yupResolver(schema)
+})
 
   return (
       <>
@@ -16,7 +26,7 @@ const EditProfile = () => {
     sx={{
         display:"flex",
         justifyContent:"center",
-        margin:"1rem"
+        margin:"5rem 1rem 1rem 1rem"
         }}
         >Edit Profile</Typography>
     <Box sx={{
@@ -83,7 +93,7 @@ const EditProfile = () => {
       required
       />
 
-<Button variant="outlined" style={{width:"30%",marginLeft:"65%"}} w="">Save</Button>
+<Button variant="outlined" style={{width:"30%",marginLeft:"65%"}} >Save</Button>
     </FormControl>
     </Box>
       </>

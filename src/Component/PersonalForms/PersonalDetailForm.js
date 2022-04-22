@@ -19,7 +19,7 @@ import personalForm from "../SVG/personalform.svg"
 const schema = yup.object().shape({
   // UserType: yup.string().required(),
   FullName:yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required(),
-  // Gender:yup.string().required(),
+  Gender:yup.string().required(),
   Email:yup.string().email().required(),
   PhoneNo:yup.string().phone("IN").required()
 })

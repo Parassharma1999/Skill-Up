@@ -6,7 +6,7 @@ import Logo from "../SVG/Logo1.svg"
 const LandingPageNavbar = () => {
   return (
     <nav>
-      <Box height={"5rem"} 
+      <Box height={"4rem"} 
         display={"flex"}
         // marginBottom={"2rem"} 
         className="landingPageNavbar"

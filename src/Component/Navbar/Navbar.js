@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import './Navbar.css'
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import { Box, Typography,Avatar } from "@mui/material";
 import { auth } from "../../firebase"; 
 import DropMenu from '../Dropdown Menu/DropMenu'
@@ -45,26 +45,26 @@ const Navbar = () => {
          
         }}> 
 
-        <NavLink to="/Homepage" style={{textDecoration:"none"}} activeClassName="activeLink">
+        <Link to="/Homepage" style={{textDecoration:"none"}} activeClassName="activeLink">
           <Typography className="borderAnimation" variant="h6" 
           // sx={{color:"black"}}
           
           >
             Home
           </Typography>
-        </NavLink>
+        </Link>
 
-        <NavLink to="/Homepage/blogs"  style={{textDecoration:"none"}} activeClassName="activeLink">
+        <Link to="/Homepage/blogs"  style={{textDecoration:"none"}} activeClassName="activeLink">
           <Typography variant="h6"
           className="borderAnimation"
            sx={{color:"black"}}
            >
              Blogs
           </Typography>
-        </NavLink>
+        </Link>
 
 
-        <NavLink to="/liveSessions" style={{textDecoration:"none"}} activeClassName="activeLink">
+        <Link to="/liveSessions" style={{textDecoration:"none"}} activeClassName="activeLink">
           <Typography variant="h6" 
           className="borderAnimation" 
           sx={{
@@ -73,7 +73,7 @@ const Navbar = () => {
            >
             Live Session
           </Typography>
-        </NavLink>
+        </Link>
 
 
         <Avatar className="Avatar" src={auth.currentUser.photoURL} sx={{border:"0.3px solid black"}} 

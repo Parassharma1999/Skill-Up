@@ -25,6 +25,13 @@ import { FormContext } from "./Component/Context/DetailFormContext.js";
 import PersonalDetailForm from "./Component/PersonalForms/PersonalDetailForm";
 import EducationForm from "./Component/EducationForm/EducationForm";
 import DocumentForm from "./Component/DocumentForm/DocumentForm";
+import { ThemeProvider, createTheme } from "@mui/material";
+
+const theme = createTheme({
+  typography:{
+    fontFamily:["Montserrat","sans-serif"].join(","),
+  }
+});
 
 
 const App = () => {
@@ -33,7 +40,7 @@ const App = () => {
   const [showEducationForm, setshowEducationForm] = useState(false);
  
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <FormContext.Provider value={{
         showPersonaldetailForm,
         showEducationForm, 
@@ -92,7 +99,7 @@ const App = () => {
         </Routes>
       </AuthProvider>
   </FormContext.Provider>
-    </div>
+    </ThemeProvider>
   );
 };
 

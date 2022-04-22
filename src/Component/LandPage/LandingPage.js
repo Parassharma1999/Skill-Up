@@ -8,6 +8,8 @@ import live from "../SVG/Live.svg";
 import Book from "../SVG/Book.svg";
 // import LandingPageNavbar from "./LandingPageNavbar";
 import  BottomNavbar from "../Navbar/BottomNavbar/BottomNavbar"
+import Loader from "../Loader/CircularProgressWithLabel"
+
 const LandingPageNavbar = React.lazy(()=>import("./LandingPageNavbar.js"));
 
 
@@ -16,7 +18,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={Loader}>
       <LandingPageNavbar />
       </Suspense>
       <Box
@@ -31,7 +33,7 @@ const LandingPage = () => {
       >
         <Box
           position={"relative"}
-          marginTop="6rem"
+          marginTop="5rem"
           id="Left"
           padding={"2rem"}
           sx={{
@@ -43,29 +45,23 @@ const LandingPage = () => {
             // widht:"100wh"
           }}
         >
-          <Typography variant="h3" padding={"3px"}>
+          <Typography variant="h3" padding={"3px"} fontFamily="Raleway" lineHeight={1} fontWeight={700} fontSize={"80px"}>
             Ready to boost up your Skills!
           </Typography>
-          <div sx={{ marginTop: "1rem" }}>
-            <Link to="/Homepage">
+          <div style={{ marginTop: "1rem" }} >
               <Typography
                 sx={{ display: "inline", marginTop: "1rem" }}
-                fontWeight={"medium"}
-                fontSize={"2rem"}
+                fontWeight={"bold"}
+                fontSize={"1.5rem"}
               >
-                <mark style={{ padding: "3px", borderRadius: "10%" }}>
-                  SKILLUP
-                </mark>
+                  Skill Up
               </Typography>
-            </Link>
             <Typography
               variant="h5"
-              sx={{ display: "inline", paddingX: "0.5rem" }}
+              sx={{ display: "inline", paddingX: "0.5rem", fontFamily:"Raleway",fontSize:"20px" }}
             >
-              is a amazing platform for the children of 12 - 18 years for
-              enhancing there skills Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Voluptas assumenda sed qui repudiandae dolorem
-              accusamus omnis fugit voluptate blanditiis. Sapiente!
+              is a absolutely free and amazing platform for the children and students for
+              enhancing their skills and gaining knowledge about the top trending skills around the world.
             </Typography>
           <Typography
             className="Quote"
@@ -75,7 +71,9 @@ const LandingPage = () => {
             bottom={"100px"}
             fontWeight={"500"}
           >
-            "Every skill you acquire doubles your odds of success."
+           <i>
+              "Every skill you acquire doubles your odds of success."
+             </i>
           </Typography>
           </div>
         </Box>
@@ -115,7 +113,7 @@ const LandingPage = () => {
             
             <div className="service1_text">
               <h1 className="service1_text_head" >Video Lessons</h1>
-             <p>
+             <p className="landingText">
                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
              </p>
         </div>
@@ -125,7 +123,7 @@ const LandingPage = () => {
           <div className="middleSection_1">
             <div className="service1_text">
               <h1 className="service1_text_head" >One-One Sessions</h1>
-             <p>
+             <p className="landingText">
                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
              </p>
         </div>
@@ -146,7 +144,7 @@ const LandingPage = () => {
             
             <div className="service1_text">
               <h1 className="service1_text_head" >Skills Oriented Articles</h1>
-             <p>
+             <p className="landingText">
                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
              </p>
         </div>
