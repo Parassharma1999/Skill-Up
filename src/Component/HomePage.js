@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import {Button,Box, Typography} from '@mui/material'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // import {useDispatch} from "react-redux"
 import {db} from "../firebase"
 import "./Homepage.css"
@@ -8,13 +8,14 @@ import { collection, getDocs} from 'firebase/firestore'
 import Navbar from './Navbar/Navbar'
 import BottomNavbar from "./Navbar/BottomNavbar/BottomNavbar"
 // import {OpenArticle} from './Reducers/ArticleReducer' 
+import {singleBlog} from "../App"
 
 const HomePage = () => {
+  const {singleBlogDetail, setSingleBlogDetail} =useContext(singleBlog);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [article, setArticle] = useState([]);
-  // const dispatch = useDispatch();
 
 
   useEffect(()=>{  
@@ -47,11 +48,21 @@ const HomePage = () => {
   };
 },[]) 
 
-  // const ArticleHandler=(index,Title,data)=>{
-  //    console.log(index,Title,data);
-  //    dispatch(OpenArticle(Title));
-  //    navigate("/Homepage/article");
-  //  }
+  const ArticleHandler=(index,Title,data,Image,Date)=>{
+     console.log(index,Title,data);
+     setSingleBlogDetail({
+       title:Title,
+       text:data,
+       image:Image,
+       time:String( Date.toDate().toLocaleTimeString('en-US')),
+       date:Date.toDate().toDateString()
+
+     })
+
+     navigate("/Homepage/singleBlog")
+   }
+
+   console.log(article[0]);
   
   return (
     <div>
@@ -71,16 +82,16 @@ const HomePage = () => {
             <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
             <img src={item.image} alt="students" height={"100%"} width={"100%"}
              style={{objectFit:"fill"}} />
-            </Box>
+            </Box> 
 
             
-            <Typography variant="h5" marginY={"1rem"}>{item.Title}</Typography>
+            <Typography variant="h5" marginY={"1rem"}>{item.Title}{item.date}</Typography>
 
             <Box height={"100px"} overflow={"hidden"} display={"flex"} flexDirection={"column"} marginBottom={"0.2rem"}>
             <Typography textAlign={"justify"}>{item.article}</Typography>
             </Box>
             <Button variant={"contained"} 
-            // onClick={()=>ArticleHandler(index,item.Title,item.article)}
+            onClick={()=>ArticleHandler(index,item.Title,item.article,item.image,item.Date)}
              sx={{width:"50%",marginX:"auto",position:"static"}}>Read More...</Button>
             </Box>
           </Box>

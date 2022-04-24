@@ -128,53 +128,6 @@ const DocumentForm = () => {
             alignItems: "center",
           }}
         >
-          {/* <FormControl style={{ width: "50%", alignSelf: "center" }} required>
-            <InputLabel>ID Card</InputLabel>
-            <Select
-              label="ID Card"
-            >
-              <MenuItem value="Aadhar Card">Aadhar Card</MenuItem>
-              <MenuItem value="Driving License">Driving License</MenuItem>
-              <MenuItem value="Voter ID">Voter ID</MenuItem>
-              <MenuItem value="Passport">Passport</MenuItem>
-              <MenuItem value="Any Other">Any Other</MenuItem>
-            </Select>
-          </FormControl> */}
-          {/* 
-          <input type={"file"} onChange={changeHandler} />
-          <Button
-            variant="outlined"
-            style={{ width: "40%" }}
-            onClick={()=>console.log(filesList.name)}
-          >
-            save
-          </Button>
-          <img src=""></img> */}
-
-          {/* <Typography>Any Certification</Typography>
-
-          <TextField
-            required
-            label="Certifcation Field Name"
-            sx={{ margin: "1rem" }}
-            value={educationalDetails.institutionCity}
-            onChange={(e) => {
-              setEducationalDetails((prevState) => {
-                return {
-                  ...prevState,
-                  institutionCity: e.target.value,
-                };
-              });
-            }}
-          /> */}
-          {/* 
-          <Button
-            variant="outlined"
-            style={{ width: "30%", marginLeft: "65%" }}
-          >
-            Next
-          </Button> */}
-
           <form
             onSubmit={handleSubmit(submitHandler)}
             style={{

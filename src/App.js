@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,createContext} from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./Component/SignUp";
@@ -25,22 +25,32 @@ import { FormContext } from "./Component/Context/DetailFormContext.js";
 import PersonalDetailForm from "./Component/PersonalForms/PersonalDetailForm";
 import EducationForm from "./Component/EducationForm/EducationForm";
 import DocumentForm from "./Component/DocumentForm/DocumentForm";
-import { ThemeProvider, createTheme } from "@mui/material";
+import SingleBlog from "./Component/Blogs/SingleBlog";
 
+import { ThemeProvider, createTheme } from "@mui/material";
 const theme = createTheme({
   typography:{
     fontFamily:["Montserrat","sans-serif"].join(","),
   }
 });
 
+export const singleBlog = createContext();
+
 
 const App = () => {
+  
+  const [singleBlogDetail, setSingleBlogDetail] = useState({
+    title:null,
+    text:null,
+    image:null
+  })
 
   const [showPersonaldetailForm, setshowPersonaldetailForm] = useState(false);
   const [showEducationForm, setshowEducationForm] = useState(false);
  
   return (
     <ThemeProvider theme={theme}>
+      <singleBlog.Provider value={{singleBlogDetail,setSingleBlogDetail}}>
       <FormContext.Provider value={{
         showPersonaldetailForm,
         showEducationForm, 
@@ -61,7 +71,7 @@ const App = () => {
               <AboutUs />
               // </PrivateRouteAboutus>
             }
-          />
+            />
           <Route
             path="/Profile"
             element={
@@ -88,6 +98,9 @@ const App = () => {
               // </PrivateRouteEditProfile>
             }
             />
+ 
+           <Route path="/Homepage/singleBlog" element={<SingleBlog/>}  />
+
           <Route path="/Homepage/videos" element={<ConfirmPage />} />
 
           <Route path="/CreateSession" element={<CreateSession />} />
@@ -99,6 +112,7 @@ const App = () => {
         </Routes>
       </AuthProvider>
   </FormContext.Provider>
+  </singleBlog.Provider>
     </ThemeProvider>
   );
 };

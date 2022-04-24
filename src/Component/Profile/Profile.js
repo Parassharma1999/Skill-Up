@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { storage } from "../../firebase";
 import { BiEdit } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteModal from "../Modal/DeleteModal";
 import "./Profile.css";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import {
   Typography,
   Box,
@@ -16,11 +22,13 @@ import { useAuth } from "../../AuthContext";
 import { auth, db } from "../../firebase";
 import Navbar from "../Navbar/Navbar";
 import { doc, getDoc, getDocs } from "firebase/firestore";
-import { SetMeal } from "@mui/icons-material";
 
 const Profile = () => {
+
   const [isModalOpen,setIsModalOpen] = useState(false);
   const [info, setInfo] = useState([]);
+  const [profilePic, setProfilePic] = useState([]);
+  const [profileURL, setProfileURL] = useState(null);
   const navigate = useNavigate();
   const { deleteUsers, Logout } = useAuth();
 
@@ -44,6 +52,29 @@ const Profile = () => {
     // await deleteUsers();
     // navigate("/");
   };
+
+
+  function picHandler(e){
+   setProfilePic([...profilePic,e.target.files[0]]);
+
+   const newFile = e.target.files[0];
+   const storageRef = ref(storage, "ProfilePic");
+   const filePath = ref(storageRef, newFile.name);
+   const uploadFile = uploadBytesResumable(filePath, newFile);
+   
+   uploadFile.on("state_changed", (snapshot) => {
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    console.log(progress);
+    
+    if (progress === 100) {
+      setTimeout(async () => {
+        const URL = await getDownloadURL(filePath);
+        console.log(URL);
+        setProfileURL(URL);
+      }, [2000]);
+    }
+  });
+  }
 
   return (
     <>
@@ -82,7 +113,7 @@ const Profile = () => {
           flexDirection="column"
         >
           <Avatar
-            src={auth.currentUser.photoURL}
+            src={profileURL}
             sx={{ width: 200, height: 200, fontSize: "6rem" }}
           />
           <Input
@@ -90,10 +121,12 @@ const Profile = () => {
             id="contained-button-file"
             multiple
             type="file"
+            onChange={picHandler}
+            style={{border:"none",outline:"none"}}
           />
-          <Button variant="contained" component="span">
+          {/* <Button variant="contained" component="span">
             Upload
-          </Button>
+          </Button> */}
 
           <p style={{ marginTop: "1rem",fontSize:"20px"}}>Account Type: &nbsp;<b> {info.UserType}</b></p>
         </Box>
@@ -103,9 +136,10 @@ const Profile = () => {
           display={"Flex"}
           flexDirection={"column"}
           flex={1}
+          height={"90%"}
+
         >
           <Box
-            height={"70%"}
             width={"80%"}
             padding={"1rem"}
             margin={"0 auto"}
@@ -193,9 +227,17 @@ const Profile = () => {
               </p>
             </Box>
             {/* <Typography>Email Verified: {auth.currentUser.emailVerified}</Typography> */}
+         <Box style={{marginTop:"10%"}}>
+            <Typography variant="h4">Account Setting</Typography>
+              <hr />
+          <div style={{display:"flex",width:"60%",marginTop:"3%",justifyContent:"space-between"}}>
+           <p className="infoTitle" style={{fontWeight:"600"}}>Delete Account :</p>
+          <Button variant={"outlined"} onClick={deleteHandler} style={{width:"40%"}}>Delete</Button>
+          </div>
+         </Box>
           </Box>
 
-          <Button onClick={deleteHandler}>Delete</Button>
+        
         </Box>
       </Box>
     </>

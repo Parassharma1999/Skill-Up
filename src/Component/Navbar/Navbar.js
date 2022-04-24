@@ -45,16 +45,16 @@ const Navbar = () => {
          
         }}> 
 
-        <Link to="/Homepage" style={{textDecoration:"none"}} activeClassName="activeLink">
+        <Link to="/Homepage" style={{textDecoration:"none"}} >
           <Typography className="borderAnimation" variant="h6" 
-          // sx={{color:"black"}}
+          sx={{color:"black"}}
           
           >
             Home
           </Typography>
         </Link>
 
-        <Link to="/Homepage/blogs"  style={{textDecoration:"none"}} activeClassName="activeLink">
+        <Link to="/Homepage/blogs"  style={{textDecoration:"none"}} >
           <Typography variant="h6"
           className="borderAnimation"
            sx={{color:"black"}}
@@ -64,7 +64,7 @@ const Navbar = () => {
         </Link>
 
 
-        <Link to="/liveSessions" style={{textDecoration:"none"}} activeClassName="activeLink">
+        <Link to="/liveSessions" style={{textDecoration:"none"}} >
           <Typography variant="h6" 
           className="borderAnimation" 
           sx={{
