@@ -38,7 +38,7 @@ const SignUp = () => {
   const [correctEmail,setCorrectEmail] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { signInWithGoogle, signInWithFacebook, sendEmailLink } = useAuth();  //Method imported from AUth
   
@@ -97,6 +97,7 @@ const SignUp = () => {
       setLoading(!loading);
     } catch (error) {
       setLoading(false);
+      setError("Account exists with different credential")
       console.log(error);
     }
   };
@@ -189,14 +190,15 @@ const SignUp = () => {
               Sign Up/Log In
             </Typography>
 
-            {/* {error && (
+            {error && (
               <Alert severity="error" style={{ marginBottom: "1rem" }}>
                 {error}
               </Alert>
-            )} */}
+            )}
                 {correctEmail && <Alert severity="success" style={{ marginBottom: "1rem",position:"relative" }}>
                 {message}
                 </Alert>}
+
 
             <Box
               display="flex"

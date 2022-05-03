@@ -78,13 +78,13 @@ return (
           </ListItem>
 
 
-          <ListItem  disablePadding={true}>
+          {/* <ListItem  disablePadding={true}>
             <Link to="/EditProfile"  style={{textDecoration:"none",color:"black"}}>
             <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
                <ListItemText primary="Edit Profile" style={{alignSelf:"center"}}/>
             </ListItemButton>
           </Link>
-          </ListItem>
+          </ListItem> */}
 
       {(localStorage.getItem("userType") === "Volunteer" || presentUserType==="Volunteer") && <ListItem disablePadding>
             <Link to="/createSession"style={{textDecoration:"none",color:"black"}}>

@@ -109,7 +109,7 @@ console.log(sessionElement)
     sx={{
         display:"flex",
         justifyContent:"center",
-        margin:"1rem"
+        margin:"4rem 1rem 1rem 1rem"
         }}
         >Create a Session</Typography>
       

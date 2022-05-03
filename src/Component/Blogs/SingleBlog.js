@@ -12,6 +12,7 @@ const SingleBlog = () => {
   return (
       <>
       <Navbar/>
+      
     <div className="singleBlog">
         <div className="singleBlogTitleWrapper" style={{display:"flex",alignItems:"flex-start",width:"100%"}}>
       <p className="singleBlogTitle">{singleBlogDetail.title}</p>

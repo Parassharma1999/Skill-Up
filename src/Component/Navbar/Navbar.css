@@ -1,4 +1,4 @@
-.borderAnimation:after {
+/* .borderAnimation:after {
     content: '';
     display: block;
     margin: auto;
@@ -17,8 +17,43 @@
     transform: scale(1.1);
     transition: all 0.1s linear;
     cursor:pointer;
+  } */
+  
+  
+  .homeButton, .blogButton,.sessionButton{
+    border: 1px solid black;
+    padding: 5px;
+    color: black;
+    background-color: transparent;
+    color: black;
+    border-radius: 5px;
   }
   
-  .activeLink > .borderAnimation{
-   color:red;
+  
+  .activeLink-Home >div{
+    border: 1px solid black;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(33, 100, 33);;
+
   }
+
+  .activeLink-Session >div{
+    border: 1px solid black;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(33, 100, 33);;
+
+  }
+
+  .activeLink-Blog >div{
+    border: 1px solid black;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(33, 100, 33);;
+
+  }
+

@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import './Navbar.css'
-import { NavLink,Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import { Box, Typography,Avatar } from "@mui/material";
 import { auth } from "../../firebase"; 
 import DropMenu from '../Dropdown Menu/DropMenu'
@@ -45,34 +45,33 @@ const Navbar = () => {
          
         }}> 
 
-        <Link to="/Homepage" style={{textDecoration:"none"}} >
-          <Typography className="borderAnimation" variant="h6" 
-          sx={{color:"black"}}
-          
+        <Link to="/Homepage" className="activeLink-Home" style={{textDecoration:"none"}} >
+          <div className="homeButton" variant="h6" 
+          sx={{color:"black"}} 
           >
             Home
-          </Typography>
+          </div>
         </Link>
 
-        <Link to="/Homepage/blogs"  style={{textDecoration:"none"}} >
-          <Typography variant="h6"
-          className="borderAnimation"
+        <Link to="/Homepage/blogs" className="activeLink-Blog" style={{textDecoration:"none"}} >
+          <div variant="h6"
+          className="blogButton"
            sx={{color:"black"}}
            >
              Blogs
-          </Typography>
+          </div>
         </Link>
 
 
-        <Link to="/liveSessions" style={{textDecoration:"none"}} >
-          <Typography variant="h6" 
-          className="borderAnimation" 
+        <Link to="/liveSessions"  className="activeLink-Session" style={{textDecoration:"none"}} >
+          <div variant="h6" 
+          className="sessionButton" 
           sx={{
             color:"black",
             }} 
            >
             Live Session
-          </Typography>
+          </div>
         </Link>
 
 
