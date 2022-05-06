@@ -1,3 +1,4 @@
+
 .landingPageNavbar{
     /* box-shadow: 1px 1px 5px 2px grey; */
     position:fixed;
@@ -5,4 +6,8 @@
     width:100%;
     background-color: rgba(255, 255, 255, 0.266);
     backdrop-filter: blur(10px);
+} 
+
+.landingPageNavbar{
+    background-color:transparent;
 }

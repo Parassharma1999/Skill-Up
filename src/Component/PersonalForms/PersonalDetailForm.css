@@ -10,14 +10,13 @@
 }
 
 .formInput{
-    font-size:17px;
-    height: 30px;
+    height: 35px;
+    font-size: 16px;
+    padding: 5px;
     outline: none;
-    margin:-10px 0;
-    /* border-top: none;
-    border-left: none;
-    border-right:none ; */
-    /* border-bottom:1px solid black; */
+    border: 1px solid rgb(197, 191, 191);
+    border-radius: 5px;
+    width: 100%;
     
 }
 

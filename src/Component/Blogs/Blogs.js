@@ -86,12 +86,12 @@ console.log(article);
         ))
       }
   </Box> */}
-  <Typography variant="h3" display={"flex"} flexDirection={"column"} marginX={"1rem"} marginTop={"5rem"}   marginBottom={"1rem"} >Blogs</Typography>
 
 <Box style={{
  display:"grid",
  gridTemplateColumns:"auto auto auto",
  marginBottom:"2rem",
+ marginTop:"2rem",
  paddingX:'10%' 
 }}>
 {

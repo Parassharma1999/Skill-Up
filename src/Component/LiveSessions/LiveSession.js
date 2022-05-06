@@ -29,13 +29,12 @@ const LiveSession = () => {
     };
   }, []);
 
-  
   return (
     <>
       <Navbar />
       <Box
         style={{
-          marginTop:"4rem",
+          marginTop: "4rem",
           display: "grid",
           gridTemplateColumns: "repeat(3,1fr)",
           marginBottom: "2rem",
@@ -54,7 +53,7 @@ const LiveSession = () => {
               margin={"auto auto"}
             >
               <Box>
-                <Typography variant="h4">{item.courseName}</Typography>
+                <Typography variant="h4">{item.CourseName}</Typography>
               </Box>
 
               <Box display={"flex"} justifyContent="space-evenly">
@@ -68,7 +67,7 @@ const LiveSession = () => {
                     display: "inline-block",
                   }}
                 >
-                  {item.category}
+                  {item.Category}
                 </Typography>
 
                 <Typography
@@ -81,7 +80,7 @@ const LiveSession = () => {
                     display: "inline-block",
                   }}
                 >
-                  Duration: {item.duration}
+                  Duration: {item.SessionDuration}
                 </Typography>
               </Box>
 
@@ -90,8 +89,23 @@ const LiveSession = () => {
                 flexDirection={"column"}
                 justifyContent="space-evenly"
               >
+                <Box
+                  display={"flex"}
+                  justifyContent="space-between"
+                  width="90%"
+                  marginTop="0.5rem"
+                >
+                  <Typography textAlign={"justify"} margin="0.5rem">
+                    <b>Date:</b> {item.SessionDate}
+                  </Typography>
+
+                  <Typography textAlign={"justify"} margin="0.5rem">
+                    <b>Starts At:</b> {item.StartTime}
+                  </Typography>
+                </Box>
+
                 <Typography textAlign={"justify"} margin="0.5rem">
-                  <b>Description:</b> {item.description}
+                  <b>Description:</b> {item.Description}
                 </Typography>
                 <Box display="flex">
                   <Typography margin="0.5rem">
@@ -101,14 +115,13 @@ const LiveSession = () => {
                       target="blank"
                       style={{ textDecorationLine: "none", color: "blue" }}
                     >
-                      {item.link}
+                      {item.Link}
                     </a>
                   </Typography>
                   <IoIosCopy
                     size="25"
                     style={{ cursor: "pointer" }}
                     className="icon"
-                   
                   />
                 </Box>
                 {/* <Button variant={"contained"} 
