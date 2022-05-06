@@ -5,4 +5,15 @@
 .wrapper{
     background-color: whitesmoke;
     box-shadow: 1px 1px 3px black;
+    overflow-y: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.wrapper {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

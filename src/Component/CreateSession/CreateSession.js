@@ -1,238 +1,190 @@
-import React,{useState} from 'react'
+import React,{useState,useRef} from 'react'
 import {FormControl,Button,Typography,Alert,TextField,Box,MenuItem,Select,InputLabel} from "@mui/material"
 import {doc, collection, addDoc,setDoc} from "firebase/firestore" 
 import { auth,db} from '../../firebase'
+import './CreateSession.css'
 import Navbar from '../Navbar/Navbar'
 import { EventBusyTwoTone } from '@mui/icons-material'
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import "yup-phone";
+import emailjs from "@emailjs/browser";
 
+const schema = yup.object().shape({
+  Link: yup.string().url().required(),
+  CourseName: yup.string().required(),
+  StartTime: yup.string().required(),
+  SessionDate: yup.string().required(),
+  SessionDuration: yup.string().required(),
+  Category: yup.string().required(),
+  Description:yup.string().required()
+});
 
 const CreateSession = () => {
- const [message, setMessage] = useState(""); 
- const [error,setError] = useState(false);
- const [sessionElement, setSessionElement] = useState({
-     link:"",
-     duration:"",
-     description:"",
-     category:"",
-     courseName:"",
-     timing:""
- });
 
-function durationHandler(event){
-  setSessionElement((prevState)=>{
-    return {
-      ...prevState,
-      duration: event.target.value
+  const [message, setMessage] = useState("");
+  const form = useRef();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+const clickHandler = async(data)=>{
+
+  try{
+    await addDoc(collection(db, "session", auth.currentUser.uid,"sessionCollection"),data);
+    await addDoc(collection(db, "totalSession"),data);
+    // setError(false);
+
+    emailjs
+    .sendForm(
+      'service_104p747',
+      'template_cpzkvnl',  
+      form.current,
+       "ikLWHXZ9RHkW4rHe9"
+    )
+    .then(()=>{
+      setMessage("Session Published");
     }
-  })
-}
 
-
-function categoryHandler(event){
-  setSessionElement((prevState)=>{
-    return {
-      ...prevState,
-      category: event.target.value
-    }
-  })
-}
-
-function descriptionHandler(event){
-  setSessionElement((prevState)=>{
-    return {
-      ...prevState,
-      description: event.target.value
-    }
-  })
-}
-
-function linkHandler(event){
-  setSessionElement((prevState)=>{
-    return {
-      ...prevState,
-      link: event.target.value
-    }
-  })
-}
-
-
-
-function courseNameHandler(event){
-  setSessionElement((prevState)=>{
-    return {
-      ...prevState,
-      courseName: event.target.value
-    }
-  })
-}
-
- function TimingHandler(event){
-  setSessionElement((prevState)=>{
-    return {
-      ...prevState,
-      timing: event.target.value
-    }
-  })
-}
-
-const clickHandler = async()=>{
-
-if(sessionElement.link !=="" && sessionElement.duration !=="" && sessionElement.category !=="" && sessionElement.courseName !=="")
- {
-   await addDoc(collection(db, "session", auth.currentUser.uid,"sessionCollection"),sessionElement);
-   await addDoc(collection(db, "totalSession"),sessionElement);
-   setError(false);
-   setMessage("Session Published");
-}
-else
+    )
+    reset();
+  }
+catch(error)
 {
-  setError(true);
-  setMessage("Please fill all neccessary details");
+  // setError(true);
+  console.log(error)
   return;
 }
-setSessionElement({
-  link:"",
-  duration:"",
-  description:"",
-  category:"",
-  courseName:"",
-})
+console.log(form)
 }
 
-console.log(sessionElement)
-
   return (
-      <>
+      < div className='createSessionWrapper'>
       <Navbar/>
 
       <Typography variant="h2" 
     sx={{
         display:"flex",
         justifyContent:"center",
-        margin:"4rem 1rem 1rem 1rem"
+        margin:"6rem 1rem 1rem 1rem"
         }}
         >Create a Session</Typography>
+
+        {message && <Alert severity='success'>{message}</Alert>}
       
-    <Box sx={{
-      width:"50%",
-      height:"auto",
-      display:"flex",
-      justifyItems:"center",
-        // border:"2px solid black",
-        margin:"auto",
-        padding:"1rem",
-        boxShadow:15
-        }}>
-          
+      <div className='createSessionContainer'>
+      <form
+        onSubmit={handleSubmit(clickHandler)}
+        className="formContainer"
+        ref = {form}
+      >
+        <input type="text" name="volunteerEmail" className='Email' defaultValue={auth.currentUser.email} />
+        <input type="text" name="volunteerName" className="Name" defaultValue={auth.currentUser.displayName} />
+        
+        <label style={{fontWeight:"500"}}>Paste Session Link here</label>
+        <div>
+
+        <input className='SessionLink'
+          type="text"
+          placeholder="Paste Zoom, Google, WebX etc meeting link..."
+          {...register("Link")} 
+          name="Link"
+          />
+        <p className='errorMessage'>{errors.Link?.message}</p>
+          </div>
 
 
-    <FormControl sx={{
-      width:"70%",
-      height:"auto",
-      display:"flex",
-      justifyItems:"space-between",
-      margin:"auto",
-      padding:"1rem"
-    }} >
 
-          {error ?<Alert severity="error" style={{position:"absolute"}}>{message}</Alert> : <Alert severity="success" >{message}</Alert>}
+        <label style={{fontWeight:"500"}}>Course Name </label>
+        <div>
+        <input className='SessionCourseName' {...register("CourseName")} placeholder="Course Name..." name='CourseName'/>
+        <p className='errorMessage'>{errors.CourseName?.message}</p>
+        
+        </div>
 
-<TextField
-      label="Paste the Link here" 
-      id="Link"
-      value={sessionElement.link}
-      onChange={linkHandler}
-      sx={{margin:"1rem"}} 
-      />
+        <label style={{fontWeight:"500"}}>Choose Date</label>
+        <div>
+        <input className='SessionDate' name="Date" type="date" {...register("SessionDate")} />
+        <p className='errorMessage'>{errors.SessionDate?.message}</p>
 
- {/* <TextField
-      label="First Name" 
-      id="First Name"
-      sx={{margin:"1rem"}}
-      /> */}
+        </div>
 
-<TextField
-      label="Course Name" 
-      onChange={courseNameHandler}
-      value={sessionElement.courseName}
-      id="Couse Name"
-      sx={{margin:"1rem"}}
-      />
+          <label style={{fontWeight:"500"}}> Session Timings </label>
+        <div className='sessionTiming'>
+          <div>
+            <div style={{fontSize:"15px",fontWeight:"500",width:"100%",color:"grey"}}  >Starting time : </div>
+            <input className='SessionTime'
+              type="time"
+              name="Time"
+              // placeholder=""
+              {...register("StartTime")}
 
-<TextField
-      label="Starts At" 
-      onChange={TimingHandler}
-      value={sessionElement.timing}
-      id="Couse Timing"
-      sx={{margin:"1rem"}}
-      />
+            />
+            <p style={{color:"red",fontSize:"12px",width:"100%"}} >{errors.StartTime?.message}</p>
+          </div>
 
+          <div>
+          <div style={{fontSize:"15px",fontWeight:"500",color:"grey"}} >Session Duration </div>
+          <select className='SessionDuration' placeholder="User Type..." {...register("SessionDuration")} name="Duration">
+          <option value={"less than 1hr"}>Less than 1hr</option>
+          <option value={"1hr - 2hr"}>1hr - 2hr</option>
+          <option value={"2hr+"}>2hr+</option>
+        </select>
+            <p className='errorMessage'>{errors.SessionDuration?.message}</p>
+          </div>
+        </div>
 
-    <FormControl style={{margin:"1rem"}}>
-        <InputLabel>Session Duration</InputLabel>
-        <Select
-          value={sessionElement.duration}
-          onChange={durationHandler}
-          label="Session Duration"
-        >
-
-    
-          <MenuItem value={"less than 1hr"} name="duration">less than 1hr</MenuItem>
-          <MenuItem value={"1-2hr"} name="1-2hr">1-2hr</MenuItem>
-          <MenuItem value={"2hr +"} name="2hr +">2hr +</MenuItem>
-        </Select>
-        </FormControl>
+     
+        <label style={{fontWeight:"500"}} >Category</label>
+        <div>
+          <select className="SessionCategory" placeholder="Category" {...register("Category")} name='Category'>
+          <option value={"Dance"} >Dance</option>
+          <option value={"Music"} >Music</option>
+          <option value={"Art & Design"} >Art & Design</option>
+          <option value={"Cooking"} >Cooking</option>
+          <option value={"Instrument playing"} >Instrument Playing</option>
+          <option value={"Story Telling"} >Story Telling</option>
+        </select>
+        <p className='errorMessage'>{errors.Category?.message}</p>
+        </div>
 
 
-        <FormControl  style={{margin:"1rem"}}>
-        <InputLabel>Category</InputLabel>
-        <Select
-          value={sessionElement.category}
-          onChange={categoryHandler}
-          label="Session Duration"
-        >
-          <MenuItem value={"Dance"} >Dance</MenuItem>
-          <MenuItem value={"Music"} >Music</MenuItem>
-          <MenuItem value={"Art & Design"} >Art & Design</MenuItem>
-          <MenuItem value={"Cooking"} >Cooking</MenuItem>
-          <MenuItem value={"Instrument playing"} >Instrument Playing</MenuItem>
-          <MenuItem value={"Story Telling"} >Story Telling</MenuItem>
-          {/* <MenuItem value={"Dance"} >Dance</MenuItem>
-          <MenuItem value={"Dance"} >Dance</MenuItem>
-          <MenuItem value={"Dance"} >Dance</MenuItem>
-          <MenuItem value={"Dance"} >Dance</MenuItem> */}
-        </Select>
-        </FormControl>
 
 
- <TextField
-          id="outlined-multiline-static"
-          label="Description about the Session"
-          onChange={descriptionHandler}
-          value={sessionElement.description}
-          multiline
-          rows={8}
-          sx={{margin:"1rem"}}
-        />        
-   
-{/* <TextField
-      label="School/College/University" 
-      id="Phone No"
-      sx={{margin:"1rem"}}
-      required
-      />
+        <label style={{fontWeight:"500"}}>Description</label>
+        <div>
+        <textarea
+          className='SessionTextarea'
+          rows={15}
+          cols={10}
+          style={{resize:"none"}}
+          placeholder="Tell learners something about the skills they'll get to grab and your teaching methodology..."
+          {...register("Description")}
+          name="Description"
+          />
+        <p className='errorMessage'>{errors.Description?.message}</p>
+          </div>
+     
+       
 
-<TextField
-      label="Class/Standard/Course" 
-      id="Class"
-      sx={{margin:"1rem"}}
-      required */}
-      {/* /> */}
+     <div className='formBottom'>
+     <button className='resetButton' onClick={()=>{reset()}} >
+          Reset
+        </button>
+         <button className='createButton' type="submit" >
+          Create Session
+        </button>
+     </div>
 
-<Button variant="outlined" style={{width:"30%",marginLeft:"65%"}} w="" onClick={clickHandler}>Save</Button>
-    </FormControl>
-    </Box>
-    </>
+      </form>
+    </div>
+    </div>
   )
 }
 

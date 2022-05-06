@@ -79,8 +79,8 @@ const Navbar = () => {
         onClick={()=>{setDropMenu(!dropMenu)}}
          />
       </Box>
-      </Box>
         {dropMenu && <DropMenu dropMenu={dropMenu} setDropMenu={setDropMenu}/>}
+      </Box>
     </>
   );
 };

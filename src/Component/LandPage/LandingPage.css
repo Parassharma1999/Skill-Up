@@ -1,19 +1,31 @@
+:root{
+   --landingPageBackgroundColor:rgba(255, 127, 80, 0);
+ }
+
 .superman{
- animation: movesuperman 6s linear  infinite ;
+ animation: movesuperman 5s linear  infinite ;
 }
 @keyframes movesuperman {
     0%{
        transform: translateY(0px);
     }
     50%{
-        transform: translateY(10px);
+        transform: translateY(20px);
      }
      100%{
         transform: translateY(0px);
 
      }
 }
+.mainContainer{
+   background: rgb(2,0,36);
+background: linear-gradient(20deg, rgba(2,0,36,1) 0%, rgba(59,59,147,1) 54%, rgba(44,99,175,1) 71%, rgba(18,174,227,1) 96%, rgba(12,182,234,1) 100%, rgba(0,212,255,1) 100%);
+   color: white;
+}
 
+.landpageTitle{
+   color: coral;
+}
 
 /* .icons:hover{
    transform:scale(1.1);
@@ -21,26 +33,26 @@
    box-shadow: 1px 1px 4px 1px black;
 } */
 
+
+
 .Quote{
    text-align: center;
 }
 
 .middleSection{
- margin: 2rem;
+ padding: 2rem;
+ display: flex;
+ flex-direction: column;
+ gap: 4rem;
+ background-color: #e7e7e7;
 }
 
 .middleSection_1{
   display:flex;
   flex-wrap: wrap;
-  animation-name: textReveal;
-   animation-fill-mode: both;
-   animation-duration: 1000ms;
-   animation-delay: 0ms;
-   animation-iteration-count: 1;
-   opacity: 1;
  }
 
- @keyframes textReveal {
+ /* @keyframes textReveal {
    0% {
       opacity: 0;
       transform: translate3d(0px,100%, 0px);
@@ -98,7 +110,7 @@
        transform: none;
     }
     
- }
+ } */
 
 
 

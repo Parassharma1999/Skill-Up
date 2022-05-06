@@ -40,7 +40,7 @@ useEffect(() => {
   const getCurrentUser = async() =>{
   
    const docSnap = await getDoc(doc(db,"user",auth.currentUser.uid));
-    setPresentUserType(docSnap.data().userType);
+    setPresentUserType(docSnap.data().UserType);
   }
 
   document.addEventListener("mousedown", checkIfClickedOutside);

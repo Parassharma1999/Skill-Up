@@ -10,14 +10,14 @@
   .borderAnimation:hover:after {
     width: 100%;
     background: black;
-  }
+  } */
 
  
   .Avatar:hover{
     transform: scale(1.1);
     transition: all 0.1s linear;
     cursor:pointer;
-  } */
+  }
   
   
   .homeButton, .blogButton,.sessionButton{
@@ -30,7 +30,7 @@
   }
   
   
-  .activeLink-Home >div{
+  /* .activeLink-Home >div{
     border: 1px solid black;
     padding: 5px;
     color: white;
@@ -56,4 +56,4 @@
     background-color: rgb(33, 100, 33);;
 
   }
-
+ */

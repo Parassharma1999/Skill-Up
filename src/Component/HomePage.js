@@ -9,7 +9,7 @@ import Navbar from './Navbar/Navbar'
 import BottomNavbar from "./Navbar/BottomNavbar/BottomNavbar"
 // import {OpenArticle} from './Reducers/ArticleReducer' 
 import {singleBlog} from "../App"
-
+import Fade from "react-reveal/Fade"
 const HomePage = () => {
   const {singleBlogDetail, setSingleBlogDetail} =useContext(singleBlog);
 
@@ -77,6 +77,8 @@ const HomePage = () => {
       }}>
       {
         article.map((item,index)=>(
+            <Fade top>
+
           <Box key={index} className="content" margin={"1rem"} padding={"1rem"}  >
           <Box  display={"flex"} flexDirection={"column"} justifyContent={"center"} marginY={"2rem"}>
             <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
@@ -88,13 +90,14 @@ const HomePage = () => {
             <Typography variant="h5" marginY={"1rem"}>{item.Title}{item.date}</Typography>
 
             <Box height={"100px"} overflow={"hidden"} display={"flex"} flexDirection={"column"} marginBottom={"0.2rem"}>
-            <Typography textAlign={"justify"}>{item.article}</Typography>
+              <Typography textAlign={"justify"}>{item.article}</Typography>
             </Box>
             <Button variant={"contained"} 
             onClick={()=>ArticleHandler(index,item.Title,item.article,item.image,item.Date)}
-             sx={{width:"50%",marginX:"auto",position:"static"}}>Read More...</Button>
+            sx={{width:"50%",marginX:"auto",position:"static"}}>Read More...</Button>
             </Box>
           </Box>
+          </Fade>
         ))
       }
   </Box>
@@ -108,6 +111,8 @@ const HomePage = () => {
 }}>
 {
   videos.map((item,index)=>(
+    <Fade bottom>
+      
     <Box key={index}  className="content" margin={"1rem"} padding={"1rem"} marginBottom={"10rem"} >
     <Box  display={"flex"} flexDirection={"column"} justifyContent={"center"} marginY={"2rem"}>
       <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
@@ -126,6 +131,7 @@ const HomePage = () => {
 
       </Box>
     </Box>
+    </Fade>
   ))
 }
 </Box>

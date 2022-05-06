@@ -9,6 +9,8 @@ import Book from "../SVG/Book.svg";
 // import LandingPageNavbar from "./LandingPageNavbar";
 import  BottomNavbar from "../Navbar/BottomNavbar/BottomNavbar"
 import Loader from "../Loader/CircularProgressWithLabel"
+import Fade from "react-reveal/Fade"
+
 
 const LandingPageNavbar = React.lazy(()=>import("./LandingPageNavbar.js"));
 
@@ -29,6 +31,7 @@ const LandingPage = () => {
           display: "flex",
           // border: "1px solid black"
           // flexDirection:"column",
+        
         }}
       >
         <Box
@@ -44,8 +47,10 @@ const LandingPage = () => {
             // height:"100vh",
             // widht:"100wh"
           }}
-        >
-          <Typography variant="h3" padding={"3px"} fontFamily="Raleway" lineHeight={1} fontWeight={700} fontSize={"80px"}>
+        > 
+          <Fade>
+
+          <Typography className= "landpageTitle" variant="h3" padding={"3px"} fontFamily="Raleway" lineHeight={1} fontWeight={700} fontSize={"80px"}>
             Ready to boost up your Skills!
           </Typography>
           <div style={{ marginTop: "1rem" }} >
@@ -76,6 +81,7 @@ const LandingPage = () => {
              </i>
           </Typography>
           </div>
+        </Fade>
         </Box>
 
         <Box
@@ -88,7 +94,9 @@ const LandingPage = () => {
             // height:"100%",
             // widht:"100%"
           }}
-        >
+          >
+
+
           <img
             className="superman"
             src={superman}
@@ -107,7 +115,9 @@ const LandingPage = () => {
         <div className="middleSection">
         
         <div className="middleSection_1">
+          <Fade right delay>
            <div className="service_1">
+
               <img src={study} alt="videoLessons"  className="serviceImg" />
            </div>
             
@@ -117,10 +127,13 @@ const LandingPage = () => {
                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
              </p>
         </div>
+            </Fade>
           </div>
          
          
           <div className="middleSection_1">
+            <Fade left delay>
+
             <div className="service1_text">
               <h1 className="service1_text_head" >One-One Sessions</h1>
              <p className="landingText">
@@ -131,6 +144,7 @@ const LandingPage = () => {
            <div className="service_1">
               <img src={live} alt="videoLessons" id="liveImg" className="serviceImg"/>
            </div>
+            </Fade>
             
           </div>
 
@@ -138,6 +152,8 @@ const LandingPage = () => {
 
 
           <div className="middleSection_1">
+            <Fade right delay>
+
            <div className="service_1">
               <img src={Book} alt="videoLessons" className="serviceImg" />
            </div>
@@ -148,6 +164,7 @@ const LandingPage = () => {
                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
              </p>
         </div>
+            </Fade>
           </div>
         </div>
         
