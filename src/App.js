@@ -91,7 +91,7 @@ const App = () => {
           <Route path="/Homepage/article" element={<Article />} />
           <Route path="/confirm" element={<ConfirmPage />} />
           <Route
-            path="/Homepage/blogs"
+            path="/blogs"
             element={
               // <PrivateRouteEditProfile>
               <Blogs />
@@ -99,7 +99,7 @@ const App = () => {
             }
             />
  
-           <Route path="/Homepage/singleBlog" element={<SingleBlog/>}  />
+           <Route path="singleBlog" element={<SingleBlog/>}  />
 
           <Route path="/Homepage/videos" element={<ConfirmPage />} />
 

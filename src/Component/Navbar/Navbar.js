@@ -45,25 +45,25 @@ const Navbar = () => {
          
         }}> 
 
-        <Link to="/Homepage" className="activeLink-Home" style={{textDecoration:"none"}} >
+        <NavLink to="/Homepage" className="activeLink-Home" style={{textDecoration:"none"}} >
           <div className="homeButton" variant="h6" 
           sx={{color:"black"}} 
           >
             Home
           </div>
-        </Link>
+        </NavLink>
 
-        <Link to="/Homepage/blogs" className="activeLink-Blog" style={{textDecoration:"none"}} >
+        <NavLink exact to="/blogs" className="activeLink-Blog" style={{textDecoration:"none"}} >
           <div variant="h6"
           className="blogButton"
            sx={{color:"black"}}
            >
              Blogs
           </div>
-        </Link>
+        </NavLink>
 
 
-        <Link to="/liveSessions"  className="activeLink-Session" style={{textDecoration:"none"}} >
+        <NavLink to="/liveSessions"  className="activeLink-Session" style={{textDecoration:"none"}} >
           <div variant="h6" 
           className="sessionButton" 
           sx={{
@@ -72,7 +72,7 @@ const Navbar = () => {
            >
             Live Session
           </div>
-        </Link>
+        </NavLink>
 
 
         <Avatar className="Avatar" src={auth.currentUser.photoURL} sx={{border:"0.3px solid black"}} 

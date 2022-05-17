@@ -18,13 +18,12 @@
      }
 }
 .mainContainer{
-   background: rgb(2,0,36);
-background: linear-gradient(20deg, rgba(2,0,36,1) 0%, rgba(59,59,147,1) 54%, rgba(44,99,175,1) 71%, rgba(18,174,227,1) 96%, rgba(12,182,234,1) 100%, rgba(0,212,255,1) 100%);
-   color: white;
+background: #e7e7e7;
+
 }
 
 .landpageTitle{
-   color: coral;
+   color:rgb(247 118 32 / 83%);
 }
 
 /* .icons:hover{
@@ -44,7 +43,6 @@ background: linear-gradient(20deg, rgba(2,0,36,1) 0%, rgba(59,59,147,1) 54%, rgb
  display: flex;
  flex-direction: column;
  gap: 4rem;
- background-color: #e7e7e7;
 }
 
 .middleSection_1{
@@ -141,7 +139,12 @@ background: linear-gradient(20deg, rgba(2,0,36,1) 0%, rgba(59,59,147,1) 54%, rgb
  }
 
 
-
+ .service1_text_head
+ {
+   padding:0 4rem;
+ }
  .landingText{
     font-size: 20px;
+    padding:0 4rem;
+    line-height: 1.5rem;
  }

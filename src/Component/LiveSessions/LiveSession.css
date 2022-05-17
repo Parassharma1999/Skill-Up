@@ -1,11 +1,29 @@
-.icon:active{
-  color:blue;
+.icon:active {
+  color: blue;
 }
 
-.wrapper{
-    background-color: whitesmoke;
-    box-shadow: 1px 1px 3px black;
-    overflow-y: scroll;
+.wrapper {
+  /* background-color: #e7e7e7; */
+  /* box-shadow: 1px 1px 3px black; */
+  border: 2px solid rgba(26, 26, 26, 0.83);
+  overflow-y: scroll;
+  display: flex;
+  padding: 1rem;
+  border-radius: 8px;
+  height: auto;
+  /* gap: 2rem; */
+  flex-direction: column;
+  justify-content: center;
+  margin: auto auto;
+  /* background: hsla(35, 70%, 60%, 1);
+
+background: linear-gradient(135deg, hsla(35, 70%, 60%, 1) 0%, hsla(0, 0%, 100%, 1) 100%);
+
+background: -moz-linear-gradient(135deg, hsla(35, 70%, 60%, 1) 0%, hsla(0, 0%, 100%, 1) 100%);
+
+background: -webkit-linear-gradient(135deg, hsla(35, 70%, 60%, 1) 0%, hsla(0, 0%, 100%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#e0a552", endColorstr="#FFFFFF", GradientType=1 ); */
 }
 
 .wrapper::-webkit-scrollbar {
@@ -14,6 +32,81 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .wrapper {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+
+.sessionContainer {
+  margin-top: 4rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 2rem;
+  padding: 0 0;
+}
+
+.sessionCourseName {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: justify;
+}
+
+.sessionMiddle {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sessionDuration,
+.sessionCategory {
+  background-color: #fff;
+  color: rgb(247 118 32 / 83%);
+  font-weight: bold;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  text-align: center;
+  display: inline-block;
+}
+
+.timeSession {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.timeSessionWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 0.5rem;
+}
+
+.sessionDescription,
+.sessionDate,
+.sessionStartTime {
+  text-align: justify;
+  margin: 0.5rem;
+}
+
+.sessionLink {
+  margin: 0.5rem;
+  display: flex;
+}
+
+.sessionBottom {
+  display: flex;
+  /* flex-direction: column; */
+  width: 55%;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #545454;
+  justify-content: space-between;
+}
+
+.volunteerPic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid orange;
+}
+
