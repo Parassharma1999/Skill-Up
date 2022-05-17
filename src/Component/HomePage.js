@@ -1,144 +1,270 @@
-import React,{useState,useEffect,useContext} from 'react'
-import {Button,Box, Typography} from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from "react";
+import { Button, Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 // import {useDispatch} from "react-redux"
-import {db} from "../firebase"
-import "./Homepage.css"
-import { collection, getDocs} from 'firebase/firestore'
-import Navbar from './Navbar/Navbar'
-import BottomNavbar from "./Navbar/BottomNavbar/BottomNavbar"
-// import {OpenArticle} from './Reducers/ArticleReducer' 
-import {singleBlog} from "../App"
-import Fade from "react-reveal/Fade"
+import { db } from "../firebase";
+import "./Homepage.css";
+import { collection, getDoc, getDocs, doc } from "firebase/firestore";
+import Navbar from "./Navbar/Navbar";
+import BottomNavbar from "./Navbar/BottomNavbar/BottomNavbar";
+// import {OpenArticle} from './Reducers/ArticleReducer'
+import { singleBlog } from "../App";
+import Fade from "react-reveal/Fade";
 const HomePage = () => {
-  const {singleBlogDetail, setSingleBlogDetail} =useContext(singleBlog);
+  const { singleBlogDetail, setSingleBlogDetail } = useContext(singleBlog);
 
   const navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [article, setArticle] = useState([]);
+  const [mainBlog, setMainBlog] = useState([]);
+  const [mainVideo, setMainVideo] = useState([]);
 
-
-  useEffect(()=>{  
-   const getArticles = async()=>{
-     const getData=[];
-     const Snapshot = await getDocs(collection(db,"data"));
-     Snapshot.forEach((doc)=>{
-       getData.push({
-         ...doc.data()
-       })
-      })
+  useEffect(() => {
+    const getArticles = async () => {
+      const getData = [];
+      const Snapshot = await getDocs(collection(db, "data"));
+      Snapshot.forEach((doc) => {
+        getData.push({
+          ...doc.data(),
+        });
+      });
       setArticle(getData);
-    }
-     const getVideos = async()=>{
-      const getVideo=[];
-      const Snapshot = await getDocs(collection(db,"video"));
-      Snapshot.forEach((doc)=>{
+    };
+    getArticles();
+
+    const getVideos = async () => {
+      const getVideo = [];
+      const Snapshot = await getDocs(collection(db, "video"));
+      Snapshot.forEach((doc) => {
         getVideo.push({
-          ...doc.data()
-        })
-      })
+          ...doc.data(),
+        });
+      });
       setVideos(getVideo);
-    }
-  getArticles(); 
-  getVideos();
+    };
+    getVideos();
 
-  return () => {           // useEffect CleanUp function
-    setVideos([]);
-    setArticle([]);
+    return () => {
+      // useEffect CleanUp function
+      setVideos([]);
+      setArticle([]);
+      setMainBlog([]);
+    };
+  }, []);
+
+  useEffect(() => {
+    const getMainBlog = async () => {
+      const Snapshot = await getDoc(doc(db, "Blogs", "1"));
+      setMainBlog(Snapshot.data());
+    };
+
+    getMainBlog();
+
+    const getMainVideo = async () => {
+      const Snapshot = await getDoc(doc(db, "MainVideo", "1"));
+      setMainVideo(Snapshot.data());
+    };
+
+    getMainVideo();
+
+    return () => {
+      // useEffect CleanUp function
+      setMainBlog();
+      getMainVideo();
+    };
+  }, []);
+
+  console.log(mainBlog);
+  console.log(mainVideo);
+
+  const ArticleHandler = (Title, data, Image, Date) => {
+    console.log(Title, data);
+    setSingleBlogDetail({
+      title: Title,
+      text: data,
+      image: Image,
+      time: String(Date.toDate().toLocaleTimeString("en-US")),
+      date: Date.toDate().toDateString(),
+    });
+
+    navigate("/singleBlog");
   };
-},[]) 
 
-  const ArticleHandler=(index,Title,data,Image,Date)=>{
-     console.log(index,Title,data);
-     setSingleBlogDetail({
-       title:Title,
-       text:data,
-       image:Image,
-       time:String( Date.toDate().toLocaleTimeString('en-US')),
-       date:Date.toDate().toDateString()
-
-     })
-
-     navigate("/Homepage/singleBlog")
-   }
-
-   console.log(article[0]);
-  
   return (
     <div>
-       <Navbar />        
-          <Typography variant="h3" display={"flex"} flexDirection={"column"} marginX={"1rem"} marginTop={"5rem"}   marginBottom={"1rem"} >Blogs</Typography>
+      <Navbar />
 
-      <Box style={{
-       display:"grid",
-       gridTemplateColumns:"auto auto auto",
-       marginBottom:"2rem",
-       paddingX:'10%' 
-      }}>
-      {
-        article.map((item,index)=>(
-            <Fade top>
+      {/* !-------------------BLOGS SECTION---------------------! */}
 
-          <Box key={index} className="content" margin={"1rem"} padding={"1rem"}  >
-          <Box  display={"flex"} flexDirection={"column"} justifyContent={"center"} marginY={"2rem"}>
-            <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
-            <img src={item.image} alt="students" height={"100%"} width={"100%"}
-             style={{objectFit:"fill"}} />
-            </Box> 
+      <Typography
+        variant="h3"
+        display={"flex"}
+        flexDirection={"column"}
+        marginX={"1rem"}
+        marginTop={"5rem"}
+        marginBottom={"1rem"}
+      >
+        Blogs
+      </Typography>
+      <div className="homeBlogContainer">
+      <Fade bottom>
+        <div className="mainBlogWrapper">
+          <div className="mainBlogImage">
+            <img src={mainBlog.image} alt="BlogImage" className="blogImage" />
+          </div>
+          <div className="mainBlogTextSection">
+            {/* <p>{mainBlog.Date}</p> */}
+            <p className="mainBlogTitle">{mainBlog.Title}</p>
+            <div className="mainBlogText">
+              <p style={{ lineHeight: "1.5rem" }}>{mainBlog.shortTitle}</p>
+            </div>
+            <button
+              className="mainBlogButton"
+              onClick={() =>
+                ArticleHandler(
+                  mainBlog.Title,
+                  mainBlog.article,
+                  mainBlog.image,
+                  mainBlog.Date
+                )
+              }
+            >
+              READ MORE
+            </button>
+          </div>
+        </div>
 
-            
-            <Typography variant="h5" marginY={"1rem"}>{item.Title}{item.date}</Typography>
+        <div className="blogGrid">
+          {article.map((item, index) => (
+            // <Fade top>
+            <div key={index} className="blogContainer">
+              <div className="blogWrapper">
+                <div className="blogImageWrapper">
+                  <img className="blogImg" src={item.image} alt="students" />
+                </div>
 
-            <Box height={"100px"} overflow={"hidden"} display={"flex"} flexDirection={"column"} marginBottom={"0.2rem"}>
-              <Typography textAlign={"justify"}>{item.article}</Typography>
-            </Box>
-            <Button variant={"contained"} 
-            onClick={()=>ArticleHandler(index,item.Title,item.article,item.image,item.Date)}
-            sx={{width:"50%",marginX:"auto",position:"static"}}>Read More...</Button>
-            </Box>
-          </Box>
-          </Fade>
-        ))
-      }
-  </Box>
+                <div className="blogTextWrapper">
+                  <p className="blogTitle">
+                    {item.Title}
+                    {item.date}
+                  </p>
+                  <p className="blogText">{item.article}</p>
+                </div>
+                <button
+                  className="BlogButton"
+                  onClick={() =>
+                    ArticleHandler(
+                      // index,
+                      item.Title,
+                      item.article,
+                      item.image,
+                      item.Date
+                    )
+                  }
+                  sx={{ width: "50%", marginX: "auto", position: "static" }}
+                >
+                  Read More
+                </button>
+              </div>
+            </div>
+            // </Fade>
+          ))}
+        </div>
+        </Fade>
+      </div>
 
+      <Typography
+        variant="h3"
+        display={"flex"}
+        flexDirection={"column"}
+        marginX={"1rem"}
+        marginTop={"5rem"}
+        marginBottom={"rem"}
+      >
+        Video Courses
+      </Typography>
 
-  <Typography variant="h3" display={"flex"} flexDirection={"column"} marginX={"1rem"} marginTop={"5rem"} marginBottom={"rem"}>Video Courses</Typography>
+      {/* !-------------------------VIDEO SECTION--------------------! */}
 
-<Box style={{
- display:"grid",
- gridTemplateColumns:"auto auto auto"
-}}>
-{
-  videos.map((item,index)=>(
-    <Fade bottom>
-      
-    <Box key={index}  className="content" margin={"1rem"} padding={"1rem"} marginBottom={"10rem"} >
-    <Box  display={"flex"} flexDirection={"column"} justifyContent={"center"} marginY={"2rem"}>
-      <Box border={"2px solid violet"} bgcolor={"rebeccapurple"} width="100%" height="15rem">
-      <img src={item.piclink} alt="alt" height={"100%"} width={"100%"}
-       style={{objectFit:"fill"}} />
-      </Box>
+      <div className="homeBlogContainer">
+        <Fade bottom>
+          <div className="mainBlogWrapper">
+            <div className="mainBlogImage">
+              <img
+                src={mainVideo.piclink}
+                alt="BlogImage"
+                className="blogImage"
+              />
+            </div>
+            <div className="mainBlogTextSection">
+              {/* <p>{mainBlog.Date}</p> */}
+              <p className="mainBlogTitle">{mainVideo.title}</p>
+              <div className="mainBlogText">
+                <p style={{ lineHeight: "1.5rem" }}>{mainVideo.info}</p>
+              </div>
+              <a
+                href={mainVideo.link}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  margin: "0 auto",
+                }}
+              >
+                <button className="mainBlogButton">WATCH</button>
+              </a>
+            </div>
+          </div>
 
-      <Box height={"100px"} overflow={"hidden"} display={"flex"} flexDirection={"column"} marginBottom={"0.2rem"}>
-      <Typography textAlign={"justify"} marginTop={"1%"}>{item.info}</Typography>
-      </Box>
-         
-     
-     <Button variant="contained" sx={{width:"40%",marginX:"auto"}}>
-     <a href={item.link} target="_blank" rel="noreferrer" style={{textDecoration:"none",color:"white"}}>Go to Video</a> 
-     </Button>
+          <div className="blogGrid">
+            {videos.map((item, index) => (
+              // <Fade top>
+              <div key={index} className="blogContainer">
+                <div className="blogWrapper">
+                  <div className="blogImageWrapper">
+                    <img
+                      className="blogImg"
+                      src={item.piclink}
+                      alt="students"
+                    />
+                  </div>
 
-      </Box>
-    </Box>
-    </Fade>
-  ))
-}
-</Box>
+                  <div className="blogTextWrapper">
+                    <p className="blogTitle">
+                      {item.title}
+                      {item.date}
+                    </p>
+                    <p className="blogText">{item.info}</p>
+                  </div>
+                  <button
+                    className="BlogButton"
+                    sx={{ width: "50%", marginX: "auto", position: "static" }}
+                  >
+                    <a
+                      href={mainVideo.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        margin: "0 auto",
+                      }}
+                    >
+                      Watch
+                    </a>
+                  </button>
+                </div>
+              </div>
+              // </Fade>
+            ))}
+          </div>
+        </Fade>
+      </div>
 
- <BottomNavbar/>
+      <BottomNavbar />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

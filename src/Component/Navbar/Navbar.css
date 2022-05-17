@@ -13,6 +13,8 @@
   } */
 
  
+
+
   .Avatar:hover{
     transform: scale(1.1);
     transition: all 0.1s linear;
@@ -21,39 +23,24 @@
   
   
   .homeButton, .blogButton,.sessionButton{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 5px;
     color: black;
     background-color: transparent;
     color: black;
     border-radius: 5px;
+   
   }
   
+ a.active{
+   font-weight:800;
+   font-size: 18px;
+   border-bottom: 2px solid rgb(224, 165, 82);
+   width: fit-content;
+  }
+
+
   
-  /* .activeLink-Home >div{
-    border: 1px solid black;
-    padding: 5px;
-    color: white;
-    border-radius: 5px;
-    background-color: rgb(33, 100, 33);;
+  
 
-  }
-
-  .activeLink-Session >div{
-    border: 1px solid black;
-    padding: 5px;
-    color: white;
-    border-radius: 5px;
-    background-color: rgb(33, 100, 33);;
-
-  }
-
-  .activeLink-Blog >div{
-    border: 1px solid black;
-    padding: 5px;
-    color: white;
-    border-radius: 5px;
-    background-color: rgb(33, 100, 33);;
-
-  }
- */
+ 

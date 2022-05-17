@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./LiveSession.css";
 import { getDocs, doc, collection } from "firebase/firestore";
 import { auth, db } from "../../firebase";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, p, Button } from "@mui/material";
 import Navbar from "../Navbar/Navbar";
 import { IoIosCopy } from "react-icons/io";
+
 const LiveSession = () => {
   const [links, setLinks] = useState([]);
 
@@ -32,83 +33,43 @@ const LiveSession = () => {
   return (
     <>
       <Navbar />
-      <Box
-        style={{
-          marginTop: "4rem",
-          display: "grid",
-          gridTemplateColumns: "repeat(3,1fr)",
-          marginBottom: "2rem",
-          paddingX: "10%",
-        }}
-      >
+      <div className="sessionContainer">
         {links.map((item, index) => (
-          <Box key={index} height={"20%"} margin={"1rem"}>
-            <Box
-              display={"flex"}
-              className="wrapper"
-              padding={"1rem"}
-              height={"auto"}
-              flexDirection={"column"}
-              justifyContent={"center"}
-              margin={"auto auto"}
-            >
-              <Box>
-                <Typography variant="h4">{item.CourseName}</Typography>
-              </Box>
+          <div
+            key={index}
+            height={"20%"}
+            margin={"1rem"}
+            className="sessionWrapper"
+          >
+            <div className="wrapper">
+              <div className="sessionHeading">
+                <p className="sessionCourseName">{item.CourseName}</p>
+              </div>
 
-              <Box display={"flex"} justifyContent="space-evenly">
-                <Typography
-                  style={{
-                    backgroundColor: "purple",
-                    color: "lavender",
-                    padding: "0.3rem 0.5rem",
-                    borderRadius: "20px",
-                    textAlign: "center",
-                    display: "inline-block",
-                  }}
-                >
-                  {item.Category}
-                </Typography>
+              <div className="sessionMiddle">
+                <p className="sessionCategory">{item.Category}</p>
 
-                <Typography
-                  style={{
-                    backgroundColor: "purple",
-                    color: "lavender",
-                    padding: "0.3rem 0.5rem",
-                    borderRadius: "20px",
-                    textAlign: "center",
-                    display: "inline-block",
-                  }}
-                >
+                <p className="sessionDuration">
                   Duration: {item.SessionDuration}
-                </Typography>
-              </Box>
+                </p>
+              </div>
 
-              <Box
-                display={"flex"}
-                flexDirection={"column"}
-                justifyContent="space-evenly"
-              >
-                <Box
-                  display={"flex"}
-                  justifyContent="space-between"
-                  width="90%"
-                  marginTop="0.5rem"
-                >
-                  <Typography textAlign={"justify"} margin="0.5rem">
+              <div className="timeSession">
+                <div className="timeSessionWrapper">
+                  <div className="sessionDate">
                     <b>Date:</b> {item.SessionDate}
-                  </Typography>
+                  </div>
 
-                  <Typography textAlign={"justify"} margin="0.5rem">
+                  <div className="sessionStartTime">
                     <b>Starts At:</b> {item.StartTime}
-                  </Typography>
-                </Box>
+                  </div>
+                </div>
 
-                <Typography textAlign={"justify"} margin="0.5rem">
+                <div className="sessionDescription">
                   <b>Description:</b> {item.Description}
-                </Typography>
-                <Box display="flex">
-                  <Typography margin="0.5rem">
+                </div>
+                <div className="sessionLink">
+                  <p margin="0.5rem">
                     <b>Session Link:</b>{" "}
                     <a
                       href={item.link}
@@ -117,21 +78,38 @@ const LiveSession = () => {
                     >
                       {item.Link}
                     </a>
-                  </Typography>
+                  </p>
                   <IoIosCopy
                     size="25"
                     style={{ cursor: "pointer" }}
                     className="icon"
                   />
-                </Box>
+                </div>
+                <div className="sessionBottom">
+                  {/* <p textAlign={"justify"} margin="0.5rem">
+                   {item.releasedDate}
+                </p> */}
+                   <div>
+                  <img src={item.volunteerImage} alt="volunteer Pic" className="volunteerPic" />
+
+                   </div>
+                  <div>
+                    <p textAlign={"justify"} margin="0.5rem">
+                      {item.volunteerEmail}
+                    </p>
+                    <p textAlign={"justify"} margin="0.5rem">
+                      {item.volunteerName}
+                    </p>
+                  </div>
+                </div>
                 {/* <Button variant={"contained"} 
             // onClick={()=>ArticleHandler(index,item.Title,item.article)}
             sx={{width:"50%",marginX:"auto",position:"static"}}>Copy Link</Button> */}
-              </Box>
-            </Box>
-          </Box>
+              </div>
+            </div>
+          </div>
         ))}
-      </Box>
+      </div>
     </>
   );
 };

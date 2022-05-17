@@ -1,15 +1,20 @@
-import React,{useState,useRef} from 'react'
-import {FormControl,Button,Typography,Alert,TextField,Box,MenuItem,Select,InputLabel} from "@mui/material"
-import {doc, collection, addDoc,setDoc} from "firebase/firestore" 
+import React,{useState,useRef,useEffect} from 'react'
+import {FormControl,Button,Typography,TextField,Box,MenuItem,Select,InputLabel} from "@mui/material"
+import {doc, collection, addDoc,setDoc,getDocs,deleteDoc} from "firebase/firestore" 
+import DeleteSessionModal from '../Modal/DeleteSessionModal'
 import { auth,db} from '../../firebase'
 import './CreateSession.css'
+import {AiOutlineDelete} from "react-icons/ai";
 import Navbar from '../Navbar/Navbar'
-import { EventBusyTwoTone } from '@mui/icons-material'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "yup-phone";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import emailjs from "@emailjs/browser";
+import imogi from "../SVG/sad_imoji.svg"
+import { async } from 'jshint/src/prod-params'
 
 const schema = yup.object().shape({
   Link: yup.string().url().required(),
@@ -18,12 +23,19 @@ const schema = yup.object().shape({
   SessionDate: yup.string().required(),
   SessionDuration: yup.string().required(),
   Category: yup.string().required(),
-  Description:yup.string().required()
+  Description:yup.string().required(),
+  volunteerEmail:yup.string(),
+  volunteerName:yup.string(),
+  releasedDay:yup.string(),
+  volunteerImage:yup.string(),
 });
 
 const CreateSession = () => {
-
-  const [message, setMessage] = useState("");
+  const [createSessionOpen, setCreateSessionOpen] = useState(true);
+  const [mySessionOpen, setmySessionOpen] = useState(false);
+  // const [message, setMessage] = useState("");
+  const [isModalOpen,setIsModalOpen] = useState(false);
+  const [totalSessions, setTotalSessions] = useState([]);
   const form = useRef();
   const {
     register,
@@ -34,13 +46,46 @@ const CreateSession = () => {
     resolver: yupResolver(schema),
   });
 
+  console.log(new Date().toDateString());
+
+
+  // Fetching Vounteer Personal created Sessions
+ 
+  useEffect(()=>{  
+    const getPersonalSessions = async()=>{
+      const getData=[];
+      const Snapshot = await getDocs(collection(db,"session",auth.currentUser.uid,"sessionCollection"));
+      Snapshot.forEach((doc)=>{
+        console.log(doc.id)
+        getData.push({
+          ...doc.data(),
+          id:doc.id
+        })
+       })
+       setTotalSessions(getData);
+     }
+      
+   getPersonalSessions(); 
+   
+ 
+   return () => {           // useEffect CleanUp function   
+     setTotalSessions([]);
+   };
+ },[isModalOpen]) 
+
+console.log(totalSessions)
+
+  // Function for Making session
+ 
 const clickHandler = async(data)=>{
-
+  let ID = (Math.random() + 1).toString(36).substring(3);
+  
   try{
-    await addDoc(collection(db, "session", auth.currentUser.uid,"sessionCollection"),data);
-    await addDoc(collection(db, "totalSession"),data);
+    await setDoc(doc(db, "session", auth.currentUser.uid,"sessionCollection",ID),data);
+    // await setDoc(doc(db, "session", auth.currentUser.uid,"sessionCollection"),impInfo,{merge:true});
+    await setDoc(doc(db, "totalSession",ID),data);
+    // await setDoc(collection(db, "totalSession"),impInfo,{merge:true});
     // setError(false);
-
     emailjs
     .sendForm(
       'service_104p747',
@@ -48,44 +93,100 @@ const clickHandler = async(data)=>{
       form.current,
        "ikLWHXZ9RHkW4rHe9"
     )
-    .then(()=>{
-      setMessage("Session Published");
-    }
+      successsNotify();
 
-    )
     reset();
   }
 catch(error)
 {
   // setError(true);
   console.log(error)
-  return;
+  errorNotify();
 }
-console.log(form)
 }
+
+const successsNotify= ()=>{
+  toast.success("Session Published Successfully !",{
+    position:'top-center',
+    autoClose:1500,
+    theme:'dark',
+    hideProgressBar:true
+  })
+}
+
+const deleteNotify= ()=>{
+  toast.done("Session deleted !",{
+    position:'top-center',
+    autoClose:1500,
+    theme:'dark',
+    hideProgressBar:true
+  })
+}
+
+const errorNotify = ()=>{
+  toast.error("Session not Published!",{
+    theme:'dark',
+    autoClose:1500,
+    hideProgressBar:true,
+    position:'top-center',
+  })
+}
+
+const deleteHandler =() => {
+  setIsModalOpen(true);
+};
+
+function createSessionHandler(){
+  setCreateSessionOpen(true);
+  setmySessionOpen(false);
+}
+
+function mySessionHandler(){
+  setCreateSessionOpen(false);
+  setmySessionOpen(true);
+}
+
+
 
   return (
-      < div className='createSessionWrapper'>
+      <>
       <Navbar/>
 
-      <Typography variant="h2" 
+      {/* {isModalOpen && <DeleteSessionModal closeModal={setIsModalOpen}/>} */}
+
+      <div className='sessionMenu'>
+        <div className={createSessionOpen ?'createSessionActive': 'createSession'} onClick={createSessionHandler}>
+          <p>Create a Session</p>
+        </div>
+        <div className={mySessionOpen ? "mySessionsActive" : 'mySessions'} onClick={mySessionHandler}>
+          <p>My Sessions</p>
+        </div>
+      </div>
+
+      < div className='createSessionWrapper'>
+       
+  { createSessionOpen &&
+        <div className='createSessionContainer'>
+      {/* <Typography variant="h2" 
     sx={{
         display:"flex",
         justifyContent:"center",
-        margin:"6rem 1rem 1rem 1rem"
         }}
-        >Create a Session</Typography>
-
-        {message && <Alert severity='success'>{message}</Alert>}
-      
-      <div className='createSessionContainer'>
+        >Create a Session</Typography> */}
+      <div className='createSessionContainerLeft'>
+        
       <form
         onSubmit={handleSubmit(clickHandler)}
         className="formContainer"
         ref = {form}
-      >
-        <input type="text" name="volunteerEmail" className='Email' defaultValue={auth.currentUser.email} />
-        <input type="text" name="volunteerName" className="Name" defaultValue={auth.currentUser.displayName} />
+        >
+
+        <input type="text" name="volunteerEmail" className='Email' {...register("volunteerEmail")}  defaultValue={auth.currentUser.email} />
+        <input type="text" name="volunteerName" className="Name" {...register("volunteerName")} defaultValue={auth.currentUser.displayName} />
+        <input type="text" name="volunteerImage" className="Name" {...register("volunteerImage")} defaultValue={auth.currentUser.photoURL} />
+        <input type="text" name="releasedDate" className="Name" {...register("releasedDate")}  defaultValue={new Date().toDateString()} />
+        {/* <input type="text" name="releasedDate" className="Name" {...register("releasedDate")}  defaultValue={new Date().toTimeString()} /> */}
+
         
         <label style={{fontWeight:"500"}}>Paste Session Link here</label>
         <div>
@@ -168,7 +269,6 @@ console.log(form)
           {...register("Description")}
           name="Description"
           />
-        <p className='errorMessage'>{errors.Description?.message}</p>
           </div>
      
        
@@ -184,7 +284,108 @@ console.log(form)
 
       </form>
     </div>
+
+
+
     </div>
+}
+
+{ mySessionOpen && 
+
+<div className="sessionContainer">
+
+{ totalSessions.length>0 ? totalSessions.map((item, index) => (
+  <div
+    key={index}
+    height={"20%"}
+    margin={"1rem"}
+    className="sessionWrapper"
+  >
+    <div className="wrapper">
+      <div className="sessionHeading">
+        <p className="sessionCourseName">{item.CourseName}</p>
+      </div>
+
+      <div className="sessionMiddle">
+        <p className="sessionCategory">{item.Category}</p>
+
+        <p className="sessionDuration">
+          Duration: {item.SessionDuration}
+        </p>
+      </div>
+
+      <div className="timeSession">
+        <div className="timeSessionWrapper">
+          <div className="sessionDate">
+            <b>Date:</b> {item.SessionDate}
+          </div>
+
+          <div className="sessionStartTime">
+            <b>Starts At:</b> {item.StartTime}
+          </div>
+        </div>
+
+        <div className="sessionDescription">
+          <b>Description:</b> {item.Description}
+        </div>
+        <div className="sessionLink">
+          <p margin="0.5rem">
+            <b>Session Link:</b>{" "}
+            <a
+              href={item.link}
+              target="blank"
+              style={{ textDecorationLine: "none", color: "blue" }}
+            >
+              {item.Link}
+            </a>
+          </p>
+          {/* <IoIosCopy
+            size="25"
+            style={{ cursor: "pointer" }}
+            className="icon"
+          /> */}
+        </div>
+        {/* <div className="sessionBottom">
+          <p textAlign={"justify"} margin="0.5rem">
+           {item.releasedDate}
+        </p>
+           <div>
+          <img src={item.volunteerImage} alt="volunteer Pic" className="volunteerPic" />
+
+           </div>
+          <div>
+            <p textAlign={"justify"} margin="0.5rem">
+              {item.volunteerEmail}
+            </p>
+            <p textAlign={"justify"} margin="0.5rem">
+              {item.volunteerName}
+            </p>
+          </div>
+        </div> */}
+        <ToastContainer/>
+        <AiOutlineDelete className="deleteSession" onClick={async()=>{
+            deleteHandler();
+            await deleteDoc(doc(db, "session", auth.currentUser.uid,"sessionCollection",item.id))
+            await deleteDoc(doc(db, "totalSession",item.id))
+            deleteNotify();
+        }}/>
+      </div>
+    </div>
+  </div>
+)):
+<div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",margin:"0 auto"}}>
+<img src={imogi} alt="sad face" />
+<p  style={{size:"5rem 10rem",fontSize:"2rem",border:"2px solid grey",borderRadius:"10px"}}>No Sessions Created yet </p>
+
+</div>
+
+}
+</div>
+}
+    </div>
+    <ToastContainer/>
+    </>
+
   )
 }
 

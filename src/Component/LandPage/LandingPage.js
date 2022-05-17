@@ -56,10 +56,10 @@ const LandingPage = () => {
           <div style={{ marginTop: "1rem" }} >
               <Typography
                 sx={{ display: "inline", marginTop: "1rem" }}
-                fontWeight={"bold"}
-                fontSize={"1.5rem"}
+                fontWeight={"700"}
+                fontSize={"2rem"}
               >
-                  Skill Up
+                  SkillUp
               </Typography>
             <Typography
               variant="h5"
@@ -70,11 +70,11 @@ const LandingPage = () => {
             </Typography>
           <Typography
             className="Quote"
-            variant="h4"
             marginTop={"40px"}
             // position={"absolute"}
             bottom={"100px"}
-            fontWeight={"500"}
+            fontSize={"25px"}
+            fontWeight={"600"}
           >
            <i>
               "Every skill you acquire doubles your odds of success."

@@ -23,6 +23,7 @@
     "react-reveal": "^1.2.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-toastify": "^9.0.1",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11",
     "yup-phone": "^1.3.2"
