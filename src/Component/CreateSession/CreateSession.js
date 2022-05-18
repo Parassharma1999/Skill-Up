@@ -13,7 +13,7 @@ import "yup-phone";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import emailjs from "@emailjs/browser";
-import imogi from "../SVG/sad_imoji.svg"
+import imogi from "../SVG/emptySession.svg"
 import { async } from 'jshint/src/prod-params'
 
 const schema = yup.object().shape({
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   SessionDate: yup.string().required(),
   SessionDuration: yup.string().required(),
   Category: yup.string().required(),
-  Description:yup.string().required(),
+  Description:yup.string().min(50).required(),
   volunteerEmail:yup.string(),
   volunteerName:yup.string(),
   releasedDay:yup.string(),
@@ -185,6 +185,7 @@ function mySessionHandler(){
         <input type="text" name="volunteerName" className="Name" {...register("volunteerName")} defaultValue={auth.currentUser.displayName} />
         <input type="text" name="volunteerImage" className="Name" {...register("volunteerImage")} defaultValue={auth.currentUser.photoURL} />
         <input type="text" name="releasedDate" className="Name" {...register("releasedDate")}  defaultValue={new Date().toDateString()} />
+        
         {/* <input type="text" name="releasedDate" className="Name" {...register("releasedDate")}  defaultValue={new Date().toTimeString()} /> */}
 
         
@@ -249,7 +250,7 @@ function mySessionHandler(){
           <option value={"Music"} >Music</option>
           <option value={"Art & Design"} >Art & Design</option>
           <option value={"Cooking"} >Cooking</option>
-          <option value={"Instrument playing"} >Instrument Playing</option>
+          <option value={"Computer science"} >Computer science</option>
           <option value={"Story Telling"} >Story Telling</option>
         </select>
         <p className='errorMessage'>{errors.Category?.message}</p>
@@ -269,6 +270,7 @@ function mySessionHandler(){
           {...register("Description")}
           name="Description"
           />
+        <p className='errorMessage'>{errors.Description?.message}</p>
           </div>
      
        
@@ -292,7 +294,7 @@ function mySessionHandler(){
 
 { mySessionOpen && 
 
-<div className="sessionContainer">
+<div className="personalSessionContainer">
 
 { totalSessions.length>0 ? totalSessions.map((item, index) => (
   <div
@@ -301,7 +303,7 @@ function mySessionHandler(){
     margin={"1rem"}
     className="sessionWrapper"
   >
-    <div className="wrapper">
+    <div className="personalSessionwrapper">
       <div className="sessionHeading">
         <p className="sessionCourseName">{item.CourseName}</p>
       </div>
@@ -310,7 +312,7 @@ function mySessionHandler(){
         <p className="sessionCategory">{item.Category}</p>
 
         <p className="sessionDuration">
-          Duration: {item.SessionDuration}
+          {item.SessionDuration}
         </p>
       </div>
 
@@ -339,29 +341,7 @@ function mySessionHandler(){
               {item.Link}
             </a>
           </p>
-          {/* <IoIosCopy
-            size="25"
-            style={{ cursor: "pointer" }}
-            className="icon"
-          /> */}
         </div>
-        {/* <div className="sessionBottom">
-          <p textAlign={"justify"} margin="0.5rem">
-           {item.releasedDate}
-        </p>
-           <div>
-          <img src={item.volunteerImage} alt="volunteer Pic" className="volunteerPic" />
-
-           </div>
-          <div>
-            <p textAlign={"justify"} margin="0.5rem">
-              {item.volunteerEmail}
-            </p>
-            <p textAlign={"justify"} margin="0.5rem">
-              {item.volunteerName}
-            </p>
-          </div>
-        </div> */}
         <ToastContainer/>
         <AiOutlineDelete className="deleteSession" onClick={async()=>{
             deleteHandler();
@@ -373,10 +353,9 @@ function mySessionHandler(){
     </div>
   </div>
 )):
-<div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",margin:"0 auto"}}>
-<img src={imogi} alt="sad face" />
-<p  style={{size:"5rem 10rem",fontSize:"2rem",border:"2px solid grey",borderRadius:"10px"}}>No Sessions Created yet </p>
-
+<div className='emptyPersonalSession'>
+<img src={imogi} alt="Empty" height={"100px"} width="100px" />
+<p  className="emptyMessage">No Sessions available !</p>
 </div>
 
 }

@@ -98,18 +98,13 @@ const Blogs = () => {
             ))}
             </Fade>
           </div>
-
-          {/* <div>Cooking</div>
-          <div>Cooking</div>
-          <div>Cooking</div>
-          <div>Cooking</div>
-          <div>Cooking</div> */}
         </div>
         <div className="allBlogs">
+            
           {
-          // noDataMessage ? 
-          article.map((item, index) => (
-            // <Fade bottom>
+            // noDataMessage ? 
+            article.map((item, index) => (
+            <Fade>
             <div className="allBlogWrapper" key={index}>
               <div className="allBlogImage">
                 <img src={item.pic} alt="BlogImage" className="allblogImage" />
@@ -125,14 +120,15 @@ const Blogs = () => {
                   onClick={() =>
                     ArticleHandler(item.title, item.text, item.pic, item.date)
                   }
-                >
+                  >
                   READ MORE
                 </button>
               </div>
             </div>
+            </Fade>
           ))
-        // :
-        // <p>{noDataMessage}</p>
+          // :
+          // <p>{noDataMessage}</p>
         }
         </div>
       </div>

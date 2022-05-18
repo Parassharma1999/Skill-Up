@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { storage } from "../../firebase";
 import { BiEdit } from "react-icons/bi";
+import {MdAddAPhoto} from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteModal from "../Modal/DeleteModal";
 import "./Profile.css";
@@ -40,7 +41,9 @@ const Profile = () => {
 
     if (auth.currentUser.uid) {
       getData();
-    } else return;
+    }
+
+    getProfilePic();
 
     return () => {
       getData();
@@ -54,12 +57,29 @@ const Profile = () => {
   };
 
 
+function getProfilePic(){
+  const storageRef = ref(storage, "ProfilePic");
+  const filePath = ref(storageRef, auth.currentUser.email);
+getDownloadURL(ref(filePath))
+  .then((url) => {
+    console.log("Profile Pic Url : ",url)
+    // Or inserted into an <img> element
+     setProfileURL(url);
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+
+}
+
+
+
   function picHandler(e){
    setProfilePic([...profilePic,e.target.files[0]]);
 
    const newFile = e.target.files[0];
    const storageRef = ref(storage, "ProfilePic");
-   const filePath = ref(storageRef, newFile.name);
+   const filePath = ref(storageRef, auth.currentUser.email);
    const uploadFile = uploadBytesResumable(filePath, newFile);
    
    uploadFile.on("state_changed", (snapshot) => {
@@ -89,10 +109,10 @@ const Profile = () => {
           margin: "4.2rem auto",
           width: "80%",
           padding: "2rem 5rem",
-          boxShadow: "2px 5px 15px 2px grey",
+          boxShadow: "0px 1px 4px 0px rgb(0 0 0 / 25%)",
         }}
       >
-        <Link to="/EditProfile">
+        {/* <Link to="/EditProfile">
           <BiEdit
             size={20}
             style={{
@@ -102,7 +122,7 @@ const Profile = () => {
               color: "black",
             }}
           />
-        </Link>
+        </Link> */}
 
         <Box
           className="Left"
@@ -114,8 +134,11 @@ const Profile = () => {
         >
           <Avatar
             src={profileURL}
-            sx={{ width: 200, height: 200, fontSize: "6rem" }}
-          />
+            style={{position:"absolute"}}
+            id="profilePic"
+            sx={{ width: 200, height: 200, fontSize: "6rem",boxShadow: "0px 1px 4px 0px rgb(0 0 0 / 25%)" }}
+            />
+          <MdAddAPhoto className="addProfilePic"/>
           <Input
             accept="image/*"
             id="contained-button-file"
@@ -123,12 +146,8 @@ const Profile = () => {
             type="file"
             onChange={picHandler}
             style={{border:"none",outline:"none"}}
+            className="addProfilePicButton"
           />
-          {/* <Button variant="contained" component="span">
-            Upload
-          </Button> */}
-
-          <p style={{ marginTop: "1rem",fontSize:"20px"}}>Account Type: &nbsp;<b> {info.UserType}</b></p>
         </Box>
 
         <Box
@@ -230,6 +249,7 @@ const Profile = () => {
          <Box style={{marginTop:"10%"}}>
             <Typography variant="h4">Account Setting</Typography>
               <hr />
+          <p style={{ marginTop: "0.4rem",fontSize:"16px"}}><b>Account Type:</b> &nbsp; {info.UserType}</p>
           <div style={{display:"flex",width:"60%",marginTop:"3%",justifyContent:"space-between"}}>
            <p className="infoTitle" style={{fontWeight:"600"}}>Delete Account :</p>
           <Button variant={"outlined"} onClick={deleteHandler} style={{width:"40%"}}>Delete</Button>

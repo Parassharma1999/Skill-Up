@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import BottomNavbar from "../Navbar/BottomNavbar/BottomNavbar";
-import { FormContext } from "../Context/DetailFormContext.js.js";
 import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 
 import "./EducationForm.css";

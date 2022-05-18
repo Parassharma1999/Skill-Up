@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./LiveSession.css";
-import { getDocs, doc, collection } from "firebase/firestore";
+import { getDocs, doc, collection,query,where } from "firebase/firestore";
 import { auth, db } from "../../firebase";
-import { Box, p, Button } from "@mui/material";
+import {Avatar} from "@mui/material";
 import Navbar from "../Navbar/Navbar";
 import { IoIosCopy } from "react-icons/io";
+import Empty from "../SVG/emptyBlog.svg"
+import Fade from "react-reveal/Fade";
 
 const LiveSession = () => {
   const [links, setLinks] = useState([]);
+  const [categorySelect,setCategorySelected] = useState(false);
 
   const Info = [];
+  const Category = ["Cooking", "Computer science","Music","Dance"];
 
   useEffect(() => {
     const getData = async () => {
@@ -24,17 +28,47 @@ const LiveSession = () => {
     };
 
     getData();
-
     return () => {
       getData();
     };
   }, []);
 
+  async function selectCategory(category) {
+    const Data=[];
+    const collectionRef = collection(db, "totalSession");
+    const blogs = await getDocs(query(collectionRef ,where("Category", "==", `${category}`)))
+     blogs.forEach((doc)=>{
+     Data.push({
+        ...doc.data(),
+      })
+    })
+    if(Data.length >0)
+    {
+      setLinks(Data);
+    }
+  }
+
+  selectCategory();
+
   return (
     <>
       <Navbar />
+      <div className="allSessionsContainer">
+      <div className="skillCategory">
+          <div className="categoryTitle">Skills Categories</div>
+          <div className="categoryShower">
+             <Fade bottom>
+
+            {Category.map((item, index) => (
+              <div onClick={()=>setCategorySelected(true)}>
+                <p key={index} onClick={()=>selectCategory(item)} className='Categories' >{item}</p>
+              </div>
+            ))}
+            </Fade>
+          </div>
+        </div>
       <div className="sessionContainer">
-        {links.map((item, index) => (
+       {links.length >0 ? links.map((item, index) => (
           <div
             key={index}
             height={"20%"}
@@ -50,7 +84,7 @@ const LiveSession = () => {
                 <p className="sessionCategory">{item.Category}</p>
 
                 <p className="sessionDuration">
-                  Duration: {item.SessionDuration}
+                {item.SessionDuration}
                 </p>
               </div>
 
@@ -90,7 +124,11 @@ const LiveSession = () => {
                    {item.releasedDate}
                 </p> */}
                    <div>
-                  <img src={item.volunteerImage} alt="volunteer Pic" className="volunteerPic" />
+                  {/* <img src={item.volunteerImage} alt="volunteer Pic" className="volunteerPic" /> */}
+                  <Avatar
+                      src={item.volunteerImage}
+                     sx={{ width: 50, height: 50, fontSize: "6rem" }}
+          />
 
                    </div>
                   <div>
@@ -108,7 +146,14 @@ const LiveSession = () => {
               </div>
             </div>
           </div>
-        ))}
+        )):
+        <div className='emptyPersonalSession'>
+      <img src={Empty} alt="Empty" height={"200px"} width="200px" />
+       <p  className="emptyMessage">No Sessions available !</p>
+        </div>
+        
+        }
+      </div>
       </div>
     </>
   );

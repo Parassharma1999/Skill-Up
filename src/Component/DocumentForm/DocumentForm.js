@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import { storage } from "../../firebase";
+import "./DocumentForm.css"
 import {
   getDownloadURL,
   ref,
-  uploadBytesResumable,
+  uploadBytesResumable, 
 } from "firebase/storage";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -129,6 +130,7 @@ const DocumentForm = () => {
           }}
         >
           <form
+            className="DocumentForm"
             onSubmit={handleSubmit(submitHandler)}
             style={{
               fontSize: "18px",
@@ -139,8 +141,8 @@ const DocumentForm = () => {
               justifyContent: "space-evenly",
             }}
           >
-            <label>Identification Document Type</label>
-            <select {...register("IDCardType")} className="formInput">
+            <label className="documentLabel">Identification Document Type</label>
+            <select {...register("IDCardType")} className="DocumentFormInput">
               <option value="Aadhar Card">Aadhar Card</option>
               <option value="Institute Card">Institute Card</option>
               <option value="Voter Card">Voter Card</option>
@@ -150,15 +152,14 @@ const DocumentForm = () => {
             </select>
             <p className="errorMessage">{errors.IDCardType?.message}</p>
 
-            <label>Upload Identification Document</label>
+            <label className="documentLabel">Upload Identification Document</label>
             <div style={{ display: "flex",alignItems:"center" }}>
               <input
                 type="file"
                 onChange={changeHandler}
                 ref={idRef}
-                className="formInput"
+                // className="DocumentFormInput"
                 id="IDDoc"
-                style={{ marginTop: "-10px", display: "inline" }}
               />
               {IdDocURL !== null && (
                 <a
@@ -186,7 +187,7 @@ const DocumentForm = () => {
 
             <p className="errorMessage">{error && message}</p>
 
-            <label>Any Certification</label>
+            <label className="documentLabel">Any Certification</label>
             <textarea
               name="Certification Type"
               placeholder="Anything of which you are proud of OR got recognised"
@@ -196,12 +197,11 @@ const DocumentForm = () => {
               style={{ padding: "10px", fontSize: "15px" }}
             />
 
-            <label>Upload Certificate</label>
+            <label className="documentLabel">Upload Certificate</label>
             <div style={{ display: "flex" }}>
               <input
                 type="file"
-                style={{ marginTop: "-10px" }}
-                className="formInput"
+                // className="DocumentFormInput"
                 id="certificationDoc"
                 onChange={changeHandler}
                 ref={certificateRef}
@@ -239,7 +239,7 @@ const DocumentForm = () => {
                 border: "none",
                 backgroundColor: "purple",
                 color: "white",
-                padding: "5px",
+                padding: "10px",
                 borderRadius: "5px",
               }}
             >

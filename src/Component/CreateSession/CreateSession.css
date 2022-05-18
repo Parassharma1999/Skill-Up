@@ -11,9 +11,7 @@ align-items: center;
     width: 50%;
     height: 10%;
     font-size: 20px;
-    /* border:1px solid grey; */
-    margin-top: 5rem;
-    /* position: fixed; */
+    margin-top: 7rem;
 }
 
 .createSession, .mySessions{
@@ -32,8 +30,8 @@ align-items: center;
     height: 100%;
     display: flex;
     justify-content:center;
-    border:2px solid rgb(66, 165, 77);
-    color: rgb(66, 165, 77);
+    border:2px solid rgb(247 118 32 / 83%);
+    font-weight: 600;
     padding:10px;
     border-radius: 8px;
     cursor:pointer
