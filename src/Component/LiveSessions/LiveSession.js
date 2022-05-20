@@ -4,36 +4,44 @@ import { getDocs, doc, collection,query,where } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import {Avatar} from "@mui/material";
 import Navbar from "../Navbar/Navbar";
-import { IoIosCopy } from "react-icons/io";
+import { MdContentCopy } from "react-icons/md";
 import Empty from "../SVG/emptyBlog.svg"
 import Fade from "react-reveal/Fade";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const LiveSession = () => {
   const [links, setLinks] = useState([]);
   const [categorySelect,setCategorySelected] = useState(false);
 
   const Info = [];
-  const Category = ["Cooking", "Computer science","Music","Dance"];
+  const Category = ["All","Cooking", "Computer science","Music","Dance","Photography","Art & Craft"];
 
   useEffect(() => {
-    const getData = async () => {
-      const SnapShot = await getDocs(collection(db, "totalSession"));
-      SnapShot.forEach((doc) => {
-        Info.push({
-          ...doc.data(),
-        });
-      });
-
-      setLinks(Info);
-    };
-
+    
     getData();
     return () => {
       getData();
     };
   }, []);
 
+  const getData = async () => {
+    const SnapShot = await getDocs(collection(db, "totalSession"));
+    SnapShot.forEach((doc) => {
+      Info.push({
+        ...doc.data(),
+      });
+    });
+
+    setLinks(Info);
+  };
+
   async function selectCategory(category) {
+    if(category==="All")
+   {
+     getData();
+     return;
+   }
     const Data=[];
     const collectionRef = collection(db, "totalSession");
     const blogs = await getDocs(query(collectionRef ,where("Category", "==", `${category}`)))
@@ -50,9 +58,19 @@ const LiveSession = () => {
 
   selectCategory();
 
+  function copyNotify(){
+    toast.success("Link Copied !",{
+      theme:'dark',
+      autoClose:1500,
+      hideProgressBar:true,
+      position:'top-center',
+    })
+  }; 
+
   return (
     <>
       <Navbar />
+      <ToastContainer/>
       <div className="allSessionsContainer">
       <div className="skillCategory">
           <div className="categoryTitle">Skills Categories</div>
@@ -106,18 +124,23 @@ const LiveSession = () => {
                   <p margin="0.5rem">
                     <b>Session Link:</b>{" "}
                     <a
-                      href={item.link}
+                      href={item.Link}
                       target="blank"
                       style={{ textDecorationLine: "none", color: "blue" }}
                     >
                       {item.Link}
                     </a>
                   </p>
-                  <IoIosCopy
+                  <MdContentCopy
+                    title="Copy Link"
                     size="25"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", marginLeft:"10px" }}
                     className="icon"
-                  />
+                    onClick={()=>{
+                      navigator.clipboard.writeText(item.Link)
+                      copyNotify();            
+                    }}
+                    />
                 </div>
                 <div className="sessionBottom">
                   {/* <p textAlign={"justify"} margin="0.5rem">

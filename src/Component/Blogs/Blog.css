@@ -5,7 +5,7 @@
     border: 1px solid rgb(167, 165, 165);
     border-radius: 5px;
     padding: 2px;
-    margin-left: 5%;
+    margin-left: 1%;
     width: fit-content;
     
 }
@@ -102,6 +102,13 @@ font-weight: bold;
     flex-direction: column;
     padding: 25px 30px;
     background-color: rgb(224, 165, 82);
+  }
+  .allVideoTextSection{
+    display: flex;
+    flex: 0.5 1;
+    flex-direction: column;
+    padding: 25px 30px;
+    background-color: rgb(209 209 138);
   }
   
   .allBlogTitle{

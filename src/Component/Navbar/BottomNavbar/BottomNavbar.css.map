@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,aAAa,CAAC;EACZ,OAAO,EAAC,IAAI;EACZ,cAAc,EAAE,MAAM;EACtB,MAAM,EAAE,KAAK;EACb,UAAU,EAAE,eAAe;EAC3B,gBAAgB,EAAE,SAAS;EAC3B,QAAQ,EAAE,QAAQ;CACnB",
-    "sources": [
-        "BottomNavbar.scss"
-    ],
-    "names": [],
-    "file": "BottomNavbar.css"
-}

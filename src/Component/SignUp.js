@@ -8,7 +8,7 @@ import {
   Alert,
   Button,  
 } from "@mui/material";
-
+import "./SignUp.css"
 import {useForm} from  "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
 import "yup-phone"
@@ -19,11 +19,11 @@ import { useAuth } from "../AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import Signup from "./SVG/Signup.svg";
+import Logo from "./SVG/SKIllUpLogo.svg";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import PersonalDetailForm from "./PersonalForms/PersonalDetailForm";
+import Background from "./SVG/Background.svg"
 import { FormContext } from "./Context/DetailFormContext.js";
-import EducationForm from "./EducationForm/EducationForm";
 import { whitespace } from "jshint/src/reg";
 
 // !----------------------FORM VALIDATION SCHEMA---------------------------!
@@ -133,12 +133,8 @@ const SignUp = () => {
         width: "80wh",
         top: "10rem",
       }}
-        style={{
-        backgroundImage:`url(${bg})` ,
-
-        }}
+      className="signUpContainer"
     >
-      {/* <img src={bg} alt="background" width={"100vh"} height={"100vh"} /> */}
       <Box
         className="Left"
         display="flex"
@@ -147,12 +143,20 @@ const SignUp = () => {
         flexDirection="column"
         flex={1}
       >
-        <Typography variant="h4" textAlign={"center"}>
-          Welcome To SkillUp Family !
+        <img src={Logo} alt="Logo" className="Logo" style={{marginBottom:"3%"}}/>
+        <Typography
+          style={{
+          fontSize:"18px",
+          fontWeight:"500"
+          }}>
+         Please Sign in to continue !
         </Typography>
         <img
           src={Signup}
           alt="Signup"
+          style={{
+            marginTop:"2rem"
+          }}
           height={"70%"}
           width={"70%"}
           // border={"2px solid black"}
@@ -179,10 +183,11 @@ const SignUp = () => {
               height: "auto",
               // justifyContent:"center",
               // alignItems:"center",
-              boxShadow: 8,
+              boxShadow: 3,
               bgcolor: "rgb(255,255,252,0.41)",
                backdropFilter: "blur(10px)",
                p: 2,
+               borderRadius:"8px"
               // marginTop:"5rem"
             }}
           >

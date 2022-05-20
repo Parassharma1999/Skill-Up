@@ -20,6 +20,7 @@ import CreateSession from "./Component/CreateSession/CreateSession";
 import Article from "./Component/Article/Article";
 import ConfirmPage from "./Component/ConfirmPage";
 import Blogs from "./Component/Blogs/Blogs";
+import Videos from "./Component/Videos/Videos";
 import LiveSession from "./Component/LiveSessions/LiveSession";
 import { FormContext } from "./Component/Context/DetailFormContext.js";
 import PersonalDetailForm from "./Component/PersonalForms/PersonalDetailForm";
@@ -98,12 +99,15 @@ const App = () => {
               // </PrivateRouteEditProfile>
             }
             />
+
+            <Route path="/videos" element={<Videos/>}/>
  
            <Route path="singleBlog" element={<SingleBlog/>}  />
 
           <Route path="/Homepage/videos" element={<ConfirmPage />} />
 
           <Route path="/CreateSession" element={<CreateSession />} />
+        
           <Route path="/liveSessions" element={<LiveSession />} />
           <Route path="/personalForm" element={<PersonalDetailForm/>} />
           <Route path="/educationForm" element={<EducationForm/>} />

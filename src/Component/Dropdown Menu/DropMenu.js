@@ -5,6 +5,7 @@ import { useAuth } from '../../AuthContext'
 import { auth, db } from '../../firebase'
 import { doc,getDoc} from 'firebase/firestore'
 import {FormContext} from "../Context/DetailFormContext.js"
+import Fade from "react-reveal/Fade";
 
 
 const DropMenu = ({dropMenu,setDropMenu}) => {
@@ -57,18 +58,18 @@ useEffect(() => {
 
 return (
 
-    <Box position={"absolute"} top={"3.3rem"} left={"83%"} ref={ref} >
+  <Box position={"absolute"} top={"3.3rem"} left={"82%"}  ref={ref}>
     <Box sx={{ 
     width:200,
-    bgcolor: 'lavenderblush',
+    bgcolor: '#e7e7e7',
     position:"absolute",
+    boxShadow: "0px 1px 4px 0px rgb(0 0 0 / 25%)",
     display:"flex",
     justifyContent:"center",
     alignItems:"center",
     borderRadius:"5%"
   }}>
-      
-       <List>
+       {(presentUserType==="Volunteer") ? <List>
           <ListItem  disablePadding={true}>
             <Link to="/Profile"  style={{textDecoration:"none",color:"black"}}>
             <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
@@ -86,7 +87,7 @@ return (
           </Link>
           </ListItem> */}
 
-      {(localStorage.getItem("userType") === "Volunteer" || presentUserType==="Volunteer") && <ListItem disablePadding>
+      {<ListItem disablePadding>
             <Link to="/createSession"style={{textDecoration:"none",color:"black"}}>
             <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
                <ListItemText primary="Create a Session" />
@@ -111,7 +112,52 @@ return (
             </ListItemButton>
           </ListItem> 
         </List>
-        
+
+        :
+
+      <List>
+          <ListItem  disablePadding={true}>
+            <Link to="/Profile"  style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
+               <ListItemText primary="Profile" />
+            </ListItemButton>
+            </Link>
+          </ListItem>
+
+
+          {/* <ListItem  disablePadding={true}>
+            <Link to="/EditProfile"  style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
+               <ListItemText primary="Edit Profile" style={{alignSelf:"center"}}/>
+            </ListItemButton>
+          </Link>
+          </ListItem> */}
+{/* 
+      {<ListItem disablePadding>
+            <Link to="/createSession"style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
+               <ListItemText primary="Create a Session" />
+            </ListItemButton>
+          </Link>
+          </ListItem>
+       } */}
+
+           <ListItem  disablePadding={true}>
+          <Link to="/Aboutus"  style={{textDecoration:"none",color:"black"}}>
+            <ListItemButton style={{width:"12.3rem",textAlign:"center"}}>
+               <ListItemText primary="About us" />
+            </ListItemButton>
+          </Link>
+          </ListItem> 
+          
+
+
+          <ListItem disablePadding>
+            <ListItemButton onClick={logout}>
+               <ListItemText primary="Logout" style={{textAlign:"center"}} />
+            </ListItemButton>
+          </ListItem> 
+        </List>  }
     </Box>
     </Box>
   )

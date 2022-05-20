@@ -234,17 +234,18 @@ const EducationForm = () => {
 
             <button
               type="submit"
-              style={{
-                width: "8rem",
-                height: "2.5rem",
-                fontSize: "15px",
-                marginLeft: "65%",
-                border: "none",
-                backgroundColor: "purple",
-                color: "white",
-                padding: "5px",
-                borderRadius: "5px",
-              }}
+              className="FormSubmitButton"
+              // style={{
+              //   width: "8rem",
+              //   height: "2.5rem",
+              //   fontSize: "15px",
+              //   marginLeft: "65%",
+              //   border: "none",
+              //   backgroundColor: "purple",
+              //   color: "white",
+              //   padding: "5px",
+              //   borderRadius: "5px",
+              // }}
             >
               Next
             </button>

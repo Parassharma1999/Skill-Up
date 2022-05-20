@@ -6,6 +6,7 @@
   position: relative;
   align-items: center;
   justify-content: space-around;
+  background-color: rgba(224, 165, 82, 0.751);
 }
 
 .icon{
@@ -15,5 +16,4 @@
 .icon:hover{
   transform: scale(1.1);
   transition: all 0.1s linear;
-  color: rgb(72, 72, 193);
 }

@@ -231,17 +231,18 @@ const DocumentForm = () => {
 
             <button
               type="submit"
-              style={{
-                width: "30%",
-                height: "8%",
-                fontSize: "15px",
-                margin:"0 auto",
-                border: "none",
-                backgroundColor: "purple",
-                color: "white",
-                padding: "10px",
-                borderRadius: "5px",
-              }}
+              className="FormSubmitButton"
+              // style={{
+              //   width: "30%",
+              //   height: "8%",
+              //   fontSize: "15px",
+              //   margin:"0 auto",
+              //   border: "none",
+              //   backgroundColor: "purple",
+              //   color: "white",
+              //   padding: "10px",
+              //   borderRadius: "5px",
+              // }}
             >
               Submit
             </button>

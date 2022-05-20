@@ -54,7 +54,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const getMainBlog = async () => {
-      const Snapshot = await getDoc(doc(db, "Blogs", "1"));
+      const Snapshot = await getDoc(doc(db, "Blogs", "2"));
       setMainBlog(Snapshot.data());
     };
 
@@ -97,12 +97,19 @@ const HomePage = () => {
       {/* !-------------------BLOGS SECTION---------------------! */}
 
       <Typography
-        variant="h3"
+        variant="h2"
         display={"flex"}
         flexDirection={"column"}
         marginX={"1rem"}
         marginTop={"5rem"}
         marginBottom={"1rem"}
+        color={" rgb(224, 165, 82)"}
+        fontWeight={"600"}
+        style={
+          {
+            textShadow:"2px 2px 2px rgba(0, 0, 0, 0.85) "
+          }
+        }
       >
         Blogs
       </Typography>
@@ -110,13 +117,13 @@ const HomePage = () => {
       <Fade bottom>
         <div className="mainBlogWrapper">
           <div className="mainBlogImage">
-            <img src={mainBlog.image} alt="BlogImage" className="blogImage" />
+            <img src={mainBlog.pic} alt="BlogImage" className="blogImage" />
           </div>
           <div className="mainBlogTextSection">
             {/* <p>{mainBlog.Date}</p> */}
-            <p className="mainBlogTitle">{mainBlog.Title}</p>
+            <p className="mainBlogTitle">{mainBlog.title}</p>
             <div className="mainBlogText">
-              <p style={{ lineHeight: "1.5rem" }}>{mainBlog.shortTitle}</p>
+              <p style={{ lineHeight: "1.5rem" }}>{mainBlog.text}</p>
             </div>
             <button
               className="mainBlogButton"
@@ -174,12 +181,19 @@ const HomePage = () => {
       </div>
 
       <Typography
-        variant="h3"
+        variant="h2"
         display={"flex"}
         flexDirection={"column"}
         marginX={"1rem"}
-        marginTop={"5rem"}
-        marginBottom={"rem"}
+        marginTop={"6rem"}
+        marginBottom={"1rem"}
+        color = {"rgb(209 209 138)"}
+        fontWeight="bold"
+        style={
+          {
+            textShadow:"2px 2px 2px rgba(0, 0, 0, 0.85) "
+          }
+        }
       >
         Video Courses
       </Typography>
@@ -196,7 +210,7 @@ const HomePage = () => {
                 className="blogImage"
               />
             </div>
-            <div className="mainBlogTextSection">
+            <div className="mainVideoTextSection">
               {/* <p>{mainBlog.Date}</p> */}
               <p className="mainBlogTitle">{mainVideo.title}</p>
               <div className="mainBlogText">
@@ -238,11 +252,11 @@ const HomePage = () => {
                     <p className="blogText">{item.info}</p>
                   </div>
                   <button
-                    className="BlogButton"
+                    className="VideoButton"
                     sx={{ width: "50%", marginX: "auto", position: "static" }}
                   >
                     <a
-                      href={mainVideo.link}
+                      href={item.link}
                       target="_blank"
                       rel="noreferrer"
                       style={{

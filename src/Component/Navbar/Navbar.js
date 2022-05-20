@@ -4,6 +4,7 @@ import { Link,NavLink } from "react-router-dom";
 import { Box, Typography,Avatar } from "@mui/material";
 import { auth } from "../../firebase"; 
 import DropMenu from '../Dropdown Menu/DropMenu'
+import Logo from "../SVG/SKIllUpLogo.svg"
 const Navbar = () => {
  const [dropMenu, setDropMenu]=useState(false);
  
@@ -11,7 +12,7 @@ const Navbar = () => {
 //    return ()=>{
 //    setDropMenu(false);
 //    }
-//  },[])
+//  },[]) 
  
   return (
     <>
@@ -34,6 +35,7 @@ const Navbar = () => {
         }}
       > 
       <Box className="Left" width={"30%"}>
+        <img src={Logo} alt="Logo" style={{height:"3.5rem",width:"auto"}}/>
       </Box>
 
       <Box className="Right" 
@@ -59,6 +61,15 @@ const Navbar = () => {
            sx={{color:"black"}}
            >
              Blogs
+          </div>
+        </NavLink>
+
+        <NavLink exact to="/videos" className="activeLink-Blog" style={{textDecoration:"none"}} >
+          <div variant="h6"
+          className="blogButton"
+           sx={{color:"black"}}
+           >
+            Video Lessons
           </div>
         </NavLink>
 

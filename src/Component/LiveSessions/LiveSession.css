@@ -146,7 +146,7 @@
 .emptyPersonalSession{
   position: absolute;
   left: 50%;
-  right: 50%;
+  right:50%;
   top: 60%;
   bottom:40%;
   display: flex;

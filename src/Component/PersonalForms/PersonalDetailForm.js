@@ -9,6 +9,7 @@ import { auth } from "../../firebase";
 import { FormContext } from "../Context/DetailFormContext.js.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import LandingNavbar from "../LandPage/LandingPageNavbar"
 import * as yup from "yup";
 import "yup-phone";
 import personalForm from "../SVG/personalform.svg";
@@ -84,13 +85,15 @@ const PersonalDetailForm = () => {
 
   return (
     <>
+    <LandingNavbar/>
       <Box
         className="mainContainer"
+
         display="flex"
         flexDirection="row"
-        //  bgcolor={"red"}
+         bgcolor={"transparent"}
         height="100vh"
-        margin="3rem"
+        margin="6rem 3rem 3rem 3rem"
       >
         <Box className="leftContainer" display={"flex"} flex="0.5">
           <img src={personalForm} alt="Form" width="100%" />
@@ -219,17 +222,7 @@ const PersonalDetailForm = () => {
 
             <button
               type="submit"
-              style={{
-                width: "30%",
-                height: "8%",
-                fontSize: "15px",
-                marginLeft: "65%",
-                border: "none",
-                backgroundColor: "purple",
-                color: "white",
-                padding: "5px",
-                borderRadius: "5px",
-              }}
+              className="FormSubmitButton"
             >
               Next
             </button>

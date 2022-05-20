@@ -2,7 +2,7 @@ import React from 'react'
 import "./LandingPageNavbar.css"
 import { Link } from "react-router-dom";
 import { Box, Typography, Button, Container } from "@mui/material";
-import Logo from "../SVG/Logo1.svg"
+import Logo from "../SVG/SKIllUpLogo.svg"
 const LandingPageNavbar = () => {
   return (
     <nav>
@@ -12,7 +12,7 @@ const LandingPageNavbar = () => {
         className="landingPageNavbar"
         >
         <Box className='Left' display={"flex"} justifyContent={"center"} alignContent={"center"} flex={1} >
-        <img src={Logo} alt="Sudy" height="100%" width="100%" />
+        <img src={Logo} alt="Sudy"  className='Logo'/>
         </Box>
         <Box className='middle' display={"flex"} flex={2.5} >
 
