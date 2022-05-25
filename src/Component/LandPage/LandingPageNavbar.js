@@ -6,7 +6,7 @@ import Logo from "../SVG/SKIllUpLogo.svg"
 const LandingPageNavbar = () => {
   return (
     <nav>
-      <Box height={"4rem"} 
+      <Box height={"4.5rem"} 
         display={"flex"}
         // marginBottom={"2rem"} 
         className="landingPageNavbar"

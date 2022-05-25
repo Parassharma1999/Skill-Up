@@ -101,7 +101,7 @@ const HomePage = () => {
         display={"flex"}
         flexDirection={"column"}
         marginX={"1rem"}
-        marginTop={"5rem"}
+        marginTop={"6rem"}
         marginBottom={"1rem"}
         color={" rgb(224, 165, 82)"}
         fontWeight={"600"}
@@ -129,10 +129,10 @@ const HomePage = () => {
               className="mainBlogButton"
               onClick={() =>
                 ArticleHandler(
-                  mainBlog.Title,
-                  mainBlog.article,
-                  mainBlog.image,
-                  mainBlog.Date
+                  mainBlog.title,
+                  mainBlog.text,
+                  mainBlog.pic,
+                  mainBlog.date
                 )
               }
             >

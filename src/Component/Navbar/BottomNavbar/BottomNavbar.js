@@ -54,7 +54,7 @@ const Navbar = () => {
         </Fade>
       </Box>
       <Typography>
-        All rights Reserved to SkillUp | Created and Maintained{" "}
+       Copyright 2022 SKILLUP - All rights reserved | Created and Maintained by
         <b>Paras Kumar sharma</b>{" "}
       </Typography>
     </Box>

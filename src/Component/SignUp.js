@@ -21,7 +21,7 @@ import { BsFacebook } from "react-icons/bs";
 import Signup from "./SVG/Signup.svg";
 import Logo from "./SVG/SKIllUpLogo.svg";
 import { doc, getDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Background from "./SVG/Background.svg"
 import { FormContext } from "./Context/DetailFormContext.js";
 import { whitespace } from "jshint/src/reg";
@@ -124,55 +124,34 @@ const SignUp = () => {
 
     
     <Box
-      sx={{
-        display: "flex",
-        justifyItems: "center",
-        alignItems: "center",
-        flexDirection: "row",
-        height: "100vh",
-        width: "80wh",
-        top: "10rem",
-      }}
+
+      
       className="signUpContainer"
     >
-      <Box
+      <div
         className="Left"
-        display="flex"
-        justifyItems="center"
-        alignItems="center"
-        flexDirection="column"
-        flex={1}
       >
-        <img src={Logo} alt="Logo" className="Logo" style={{marginBottom:"3%"}}/>
+        <Link to="/" style={{display:"flex",justifyContent:"center"}}>
+        <img src={Logo} alt="Logo" className="SignupLogo" style={{marginBottom:"3%"}}/>
+        </Link>
+
         <Typography
           style={{
           fontSize:"18px",
           fontWeight:"500"
           }}>
-         Please Sign in to continue !
+         Please Sign Up/Login to continue !
         </Typography>
         <img
           src={Signup}
           alt="Signup"
-          style={{
-            marginTop:"2rem"
-          }}
-          height={"70%"}
-          width={"70%"}
+          className="SignupImage"
           // border={"2px solid black"}
-        />
-      </Box>
+          />
+      </div>
 
-      <Box
+      <div
         className="Right"
-        flex={1}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-
-          //  border:"2px solid black"
-        }}
       >
         {!showPersonaldetailForm && !showEducationForm && (
           <FormControl
@@ -283,7 +262,7 @@ const SignUp = () => {
             </LoadingButton>
           </FormControl>
         )}
-      </Box>
+      </div>
     </Box>
   );
 };

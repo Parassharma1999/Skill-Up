@@ -106,7 +106,7 @@ const Blogs = () => {
   
   console.log(searchKeyword)
   return (
-    <div>
+    <div style={{marginTop:"7rem"}}>
       <Navbar />
       <div className="searchBar">
         <input
@@ -173,7 +173,7 @@ const Blogs = () => {
           :
           <div className='emptySearch'>
           <img src={Empty} alt="Empty" height={"200px"} width="200px" />
-           <p  className="emptyMessage">No Blogs available for "{searchKeyword}"" keyword</p>
+           <p  className="emptyMessage">No Videos Lessons available for <b> "{searchKeyword}"</b> keyword</p>
            </div>
         }
         </div>

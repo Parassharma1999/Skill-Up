@@ -34,11 +34,13 @@ const Navbar = () => {
           // width:"100%"
         }}
       > 
-      <Box className="Left" width={"30%"}>
-        <img src={Logo} alt="Logo" style={{height:"3.5rem",width:"auto"}}/>
+      <Box className="LeftNavbar" width={"30%"} >
+      <Link to="/Homepage" style={{textDecoration:"none"}} >
+        <img src={Logo} alt="Logo" style={{height:"3.5rem",width:"auto",marginLeft:"-40px"}}/>
+      </Link>
       </Box>
 
-      <Box className="Right" 
+      <Box className="RightNavbar" 
       sx={{ 
          width:"50%",
          display: "flex",

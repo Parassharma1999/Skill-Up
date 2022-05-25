@@ -1,4 +1,4 @@
-.bottomNavbar {
+.bottomNavbar{
   display:flex;
   flex-direction: column;
   height: 8rem;
@@ -6,7 +6,7 @@
   position: relative;
   align-items: center;
   justify-content: space-around;
-  background-color: rgba(224, 165, 82, 0.751);
+  /* background-color: rgba(224, 165, 82, 0.751); */
 }
 
 .icon{
@@ -16,4 +16,5 @@
 .icon:hover{
   transform: scale(1.1);
   transition: all 0.1s linear;
+  color:rgba(224, 165, 82);
 }

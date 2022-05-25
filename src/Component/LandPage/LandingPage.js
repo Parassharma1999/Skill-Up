@@ -27,7 +27,7 @@ const LandingPage = () => {
         className="mainContainer"
          sx={{
           height: "100vh",
-          widht: "100wh",
+          widht: "100wh", 
           display: "flex",
           // border: "1px solid black"
           // flexDirection:"column",
@@ -90,6 +90,7 @@ const LandingPage = () => {
           sx={{
             display: "flex",
             flex: 1,
+            position:"relative"
             // border:"2px solid black",
             // height:"100%",
             // widht:"100%"
@@ -100,11 +101,13 @@ const LandingPage = () => {
           <img
             className="superman"
             src={superman}
-            width={"90%"}
+            width={"100%"}
+            height={"100%"}
             alt="Superman"
             display={"inline-block"}
             style={{
               zIndex: "2",
+              position:"absolute"
             }}
           />
         </Box>
@@ -124,7 +127,7 @@ const LandingPage = () => {
             <div className="service1_text">
               <h1 className="service1_text_head" >Video Lessons</h1>
              <p className="landingText">
-               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
+              SkillUp provides immense free video lessons for all kind of skills for Our learners as we believe in sharing knowledge & providing a path to all the beginners and experts.
              </p>
         </div>
             </Fade>
@@ -135,9 +138,9 @@ const LandingPage = () => {
             <Fade left delay>
 
             <div className="service1_text">
-              <h1 className="service1_text_head" >One-One Sessions</h1>
+              <h1 className="service1_text_head" >Free Live Sessions</h1>
              <p className="landingText">
-               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, aspernatur? Omnis numquam aperiam eligendi, enim hic officia, rem error sit sapiente nisi quae minima repellendus placeat eum aspernatur repudiandae. Error.
+              Live Session is the prime objective of SkillUp platform, we want a beginner to get easily connected to an Expert and have a crystal clear success path in front of them. 
              </p>
         </div>
 

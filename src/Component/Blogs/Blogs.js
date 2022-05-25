@@ -106,7 +106,7 @@ const Blogs = () => {
   selectCategory();
   
   return (
-    <div>
+    <div  style={{marginTop:"7rem"}}>
       <Navbar />
       <div className="searchBar">
         <input

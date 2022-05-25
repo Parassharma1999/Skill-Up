@@ -19,7 +19,9 @@
 }
 .mainContainer{
 
-background: #e7e7e7;
+background-image: url("../SVG/CloudBackground.svg");
+background-repeat:no-repeat ;
+height: 100vh;
 }
 
 .landpageTitle{
@@ -42,7 +44,7 @@ background: #e7e7e7;
  padding: 2rem;
  display: flex;
  flex-direction: column;
- gap: 4rem;
+ gap: 2rem;
 }
 
 .middleSection_1{
