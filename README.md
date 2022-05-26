@@ -35,6 +35,6 @@ published on the site Learner can join thesession through the Session Ticket via
 - Also, configure your own "emailjs" settings in createSession.js & AboutUs.js file.
 - All done, at last Run "npm start" to launch the project.
 
-I hope you will like this Project, Please contact me anytime for any kind of suggestions and option, open for it 24*7.
+I hope you will like this Project, Please contact me anytime for any kind of suggestions and opinions, open for it 24*7.
 
 
