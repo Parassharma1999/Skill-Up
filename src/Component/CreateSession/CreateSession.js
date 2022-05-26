@@ -88,10 +88,11 @@ const clickHandler = async(data)=>{
     // setError(false);
     emailjs
     .sendForm(
-      'service_104p747',
-      'template_cpzkvnl',  
+      process.env.REACT_APP_CREATED_SESSION_SERVICE ,
+      process.env.REACT_APP_CREATED_SESSION_TEMPLATE ,
       form.current,
-       "ikLWHXZ9RHkW4rHe9"
+      process.env.REACT_APP_CREATED_SESSION_API ,
+      
     )
       successsNotify();
 

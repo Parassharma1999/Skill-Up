@@ -84,6 +84,7 @@ background-attachment: scroll;
 }
 
 .LandpageMainText{
+   line-height: 2rem;
  display:inline; 
  padding:0 0.5rem;
  font-size:20px;
@@ -120,7 +121,8 @@ background-attachment: scroll;
  .landingText{
     font-size: 20px;
     padding:0 4rem;
-    line-height: 1.5rem;
+    line-height: 1.8rem;
+
  }
 
 .landpageTitle{

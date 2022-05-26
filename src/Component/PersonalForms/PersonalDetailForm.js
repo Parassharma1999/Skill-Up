@@ -87,7 +87,7 @@ const PersonalDetailForm = () => {
     <>
     <LandingNavbar/>
       <Box
-        className="mainContainer"
+        className="PerosnalFormContainer"
 
         display="flex"
         flexDirection="row"
