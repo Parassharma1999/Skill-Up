@@ -42,7 +42,7 @@ const LandingPage = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            flex: 1.3,
+            flex: 0.6,
             // border:"2px solid black",
             // height:"100vh",
             // widht:"100wh"
@@ -50,65 +50,42 @@ const LandingPage = () => {
         > 
           <Fade>
 
-          <Typography className= "landpageTitle" variant="h3" padding={"3px"} fontFamily="Raleway" lineHeight={1} fontWeight={700} fontSize={"80px"}>
+          <p className= "landpageTitle" >
             Ready to boost up your Skills!
-          </Typography>
+          </p>
           <div style={{ marginTop: "1rem" }} >
-              <Typography
-                sx={{ display: "inline", marginTop: "1rem" }}
-                fontWeight={"700"}
-                fontSize={"2rem"}
+              <p
+               className="skillup"
               >
-                  SkillUp
-              </Typography>
-            <Typography
-              variant="h5"
-              sx={{ display: "inline", paddingX: "0.5rem", fontFamily:"Raleway",fontSize:"20px" }}
+               SkillUp
+              </p>
+            <p
+              className="LandpageMainText"
             >
               is a absolutely free and amazing platform for the children and students for
               enhancing their skills and gaining knowledge about the top trending skills around the world.
-            </Typography>
-          <Typography
+            </p>
+          <p
             className="Quote"
-            marginTop={"40px"}
-            // position={"absolute"}
-            bottom={"100px"}
-            fontSize={"25px"}
-            fontWeight={"600"}
           >
            <i>
               "Every skill you acquire doubles your odds of success."
              </i>
-          </Typography>
+          </p>
           </div>
         </Fade>
         </Box>
 
         <Box
           id="Right"
-          marginTop="6rem"
-          sx={{
-            display: "flex",
-            flex: 1,
-            position:"relative"
-            // border:"2px solid black",
-            // height:"100%",
-            // widht:"100%"
-          }}
           >
 
 
           <img
             className="superman"
             src={superman}
-            width={"100%"}
-            height={"100%"}
             alt="Superman"
-            display={"inline-block"}
-            style={{
-              zIndex: "2",
-              position:"absolute"
-            }}
+           
           />
         </Box>
       </Box>
@@ -134,7 +111,7 @@ const LandingPage = () => {
           </div>
          
          
-          <div className="middleSection_1">
+          <div className="middleSection_1"  id="service2">
             <Fade left delay>
 
             <div className="service1_text">

@@ -7,8 +7,8 @@ import { Box, Typography } from "@mui/material";
 const Navbar = () => {
   return (
     <Box className="bottomNavbar">
-      <Typography variant="h5">Connect with us</Typography>
-      <Box display="flex" width={"20%"} justifyContent={"space-between"}>
+      <p className="bottomConnect">Connect with us</p>
+      <Box  className="bttomNavbarIcons">
         <Fade left>
           <a
             style={{ color: "black" }}
@@ -53,10 +53,10 @@ const Navbar = () => {
           </a>
         </Fade>
       </Box>
-      <Typography>
-       Copyright 2022 SKILLUP - All rights reserved | Created and Maintained by
-        <b>Paras Kumar sharma</b>{" "}
-      </Typography>
+      <p className="rights">
+       Copyright 2022 SKILLUP - All rights reserved <br/> Created and Maintained by
+        <a href="https://github.com/Parassharma1999" rel="noreferrer"  target="_blank" style={{color:"black",cursor:"pointer",textDecoration:"none"}}><b> Paras Kumar sharma</b></a>
+      </p>
     </Box>
   );
 };

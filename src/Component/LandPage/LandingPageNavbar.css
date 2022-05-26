@@ -14,3 +14,34 @@
     height:4.5rem;
     width: auto; 
 }
+
+.middle{
+    display:flex; 
+    flex:2.5;
+}
+
+@media screen and (max-width:950px) {
+    .middle{
+        flex:1;
+    }
+}
+
+
+
+@media screen and (max-width:550px) {
+    .middle{
+        flex:0.5;
+     }
+     
+}
+
+@media screen and (max-width:475px) {
+    .middle{
+        flex:0.2;
+     } 
+     .registerButton{
+         width: 110px !important;
+         font-size: 12px !important;
+         padding: 5px 0px !important;
+        }   
+    }

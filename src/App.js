@@ -7,7 +7,7 @@ import { AuthProvider } from "./AuthContext";
 // import { auth } from "./firebase";
 // import { useAuth } from "./AuthContext";
 // import Navbar from "./Component/Navbar/Navbar";
-import AboutUs from "./Component/AboutUs";
+import AboutUs from "./Component/AboutUs/AboutUs";
 import HomePage from "./Component/HomePage";
 import Profile from "./Component/Profile/Profile";
 import EditProfile from "./Component/Profile/EditProfile";

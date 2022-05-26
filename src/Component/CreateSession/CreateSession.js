@@ -248,7 +248,7 @@ function mySessionHandler(){
           <select className="SessionCategory" placeholder="Category" {...register("Category")} name='Category'>
           <option value={"Dance"} >Dance</option>
           <option value={"Music"} >Music</option>
-          <option value={"Art & Design"} >Art & Craft</option>
+          <option value={"Art & Craft"} >Art & Craft</option>
           <option value={"Cooking"} >Cooking</option>
           <option value={"Computer science"} >Computer science</option>
           <option value={"Photography"} >Photography</option>
