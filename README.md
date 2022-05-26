@@ -5,6 +5,15 @@ I'm a PG pursuing Student 🧑‍🎓, I choose SkillUp (Skill Enhancement Web A
 But, The major problem arises is that from where we can get all these stuff ? Most of the resources on sites like Udemy, Skillshare are costly, so what about Unpreviledge or Financially Weak Students ?
 Hence, considering all these thoughts, I have tried to develope ,SkillUp which can be used by anyone to follow up their interests and add some new skills in their Skillset through Video Lessons and Blogs. To make it more authenticate features like "Live session" had been added which makes learning a skill more easier and faster.
 
+# Screenshots
+
+![image](https://user-images.githubusercontent.com/88720629/170565098-8e785095-029a-4b39-9775-4ffcdacfcc64.png)
+
+![image](https://user-images.githubusercontent.com/88720629/170566205-149318ab-e9c4-4113-b01c-a9d23a9a0227.png)
+
+![image](https://user-images.githubusercontent.com/88720629/170565932-82d18d49-1add-4c8f-86d0-3c9686f6a8de.png)
+
+
 There can be 2 types of Users on this application :-
 - Learner :- Anybody who wants gain some skills
 - Volunteer :- A student, Professional, or anybody who is enough skilled to teach someone else about their mastered skill.
