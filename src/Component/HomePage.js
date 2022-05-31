@@ -9,7 +9,7 @@ import Navbar from "./Navbar/Navbar";
 import BottomNavbar from "./Navbar/BottomNavbar/BottomNavbar";
 // import {OpenArticle} from './Reducers/ArticleReducer'
 import { singleBlog } from "../App";
-import Fade from "react-reveal/Fade";
+import {Fade} from "react-awesome-reveal";
 const HomePage = () => {
   const { singleBlogDetail, setSingleBlogDetail } = useContext(singleBlog);
 

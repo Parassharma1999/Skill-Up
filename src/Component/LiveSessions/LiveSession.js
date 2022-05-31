@@ -6,7 +6,8 @@ import {Avatar} from "@mui/material";
 import Navbar from "../Navbar/Navbar";
 import { MdContentCopy } from "react-icons/md";
 import Empty from "../SVG/emptyBlog.svg"
-import Fade from "react-reveal/Fade";
+import {Fade} from "react-awesome-reveal";
+
 import { ToastContainer, toast } from 'react-toastify';
 
 

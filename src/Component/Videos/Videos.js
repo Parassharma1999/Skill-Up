@@ -8,7 +8,8 @@ import { singleBlog } from "../../App";
 import { collection, getDocs,query,where} from "firebase/firestore";
 import Navbar from "../Navbar/Navbar";
 import { FcSearch } from "react-icons/fc";
-import Fade from "react-reveal/Fade";
+import {Fade} from "react-awesome-reveal";
+
 import Empty from "../SVG/emptyBlog.svg"
 
 

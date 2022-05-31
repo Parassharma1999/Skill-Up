@@ -2,7 +2,8 @@ import React from "react";
 import "./BottomNavbar.css";
 import { BsFacebook, BsTwitter, BsInstagram, BsLinkedin } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import Fade from "react-reveal/Fade";
+import {Fade} from "react-awesome-reveal";
+
 import { Box, Typography } from "@mui/material";
 const Navbar = () => {
   return (

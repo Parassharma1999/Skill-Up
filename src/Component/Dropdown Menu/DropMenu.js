@@ -5,7 +5,8 @@ import { useAuth } from '../../AuthContext'
 import { auth, db } from '../../firebase'
 import { doc,getDoc} from 'firebase/firestore'
 import {FormContext} from "../Context/DetailFormContext.js"
-import Fade from "react-reveal/Fade";
+import {Fade} from "react-awesome-reveal";
+
 
 
 const DropMenu = ({dropMenu,setDropMenu}) => {

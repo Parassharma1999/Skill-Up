@@ -1,7 +1,6 @@
 import React,{Suspense} from "react";
 import "./LandingPage.css";
-import { Link } from "react-router-dom";
-import { Box, Container, Typography } from "@mui/material";
+import { Box} from "@mui/material";
 import superman from "../SVG/SuperMan.svg";
 import study from "../SVG/Study.svg";
 import live from "../SVG/Live.svg";
@@ -9,7 +8,8 @@ import Book from "../SVG/Book.svg";
 // import LandingPageNavbar from "./LandingPageNavbar";
 import  BottomNavbar from "../Navbar/BottomNavbar/BottomNavbar"
 import Loader from "../Loader/CircularProgressWithLabel"
-import Fade from "react-reveal/Fade"
+import {Fade} from "react-awesome-reveal";
+
 
 
 const LandingPageNavbar = React.lazy(()=>import("./LandingPageNavbar.js"));
@@ -48,7 +48,7 @@ const LandingPage = () => {
             // widht:"100wh"
           }}
         > 
-          <Fade>
+          <Fade cascade triggerOnce>
 
           <p className= "landpageTitle" >
             Ready to boost up your Skills!
@@ -95,7 +95,7 @@ const LandingPage = () => {
         <div className="middleSection">
         
         <div className="middleSection_1">
-          <Fade right delay>
+          <Fade cascade triggerOnce direction="right">
            <div className="service_1">
 
               <img src={study} alt="videoLessons"  className="serviceImg" />
@@ -112,7 +112,7 @@ const LandingPage = () => {
          
          
           <div className="middleSection_1"  id="service2">
-            <Fade left delay>
+            <Fade cascade triggerOnce direction="left">
 
             <div className="service1_text">
               <h1 className="service1_text_head" >Free Live Sessions</h1>
@@ -132,7 +132,7 @@ const LandingPage = () => {
 
 
           <div className="middleSection_1">
-            <Fade right delay>
+            <Fade cascade triggerOnce direction="right">
 
            <div className="service_1">
               <img src={Book} alt="videoLessons" className="serviceImg" />

@@ -70,7 +70,8 @@ background-attachment: scroll;
 
 .middleSection_1{
   display:flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
  }
 
 .skillup{
@@ -106,9 +107,10 @@ background-attachment: scroll;
  }
 
 
- #liveImg{
-   width: 80%;
-   height: 80%;
+ .serviceImg{
+   width: 400px;
+   height:400px;
+    padding: 20px 20px;
    align-self: center;
    margin:0 auto;
  }
@@ -225,6 +227,14 @@ background-attachment: scroll;
   .landpageTitle{
    font-size:300%;
 }
+
+.serviceImg{
+   width: 300px;
+   height:300px;
+   padding: 20px 20px;
+   align-self: center;
+   margin:0 auto;
+ }
 
   .skillup{
    font-size: 1.5rem;
