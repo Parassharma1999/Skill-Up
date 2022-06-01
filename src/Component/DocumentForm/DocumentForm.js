@@ -158,7 +158,7 @@ const DocumentForm = () => {
                 type="file"
                 onChange={changeHandler}
                 ref={idRef}
-                // className="DocumentFormInput"
+                className="DocumentFormInput"
                 id="IDDoc"
               />
               {IdDocURL !== null && (
@@ -168,7 +168,7 @@ const DocumentForm = () => {
                   rel="noreferrer"
                   style={{
                     width: "30%",
-                    height: "30px",
+                    height: "30px",  
                     textDecoration: "none",
                     color: "white",
                     fontSize: "16px",
@@ -201,7 +201,7 @@ const DocumentForm = () => {
             <div style={{ display: "flex" }}>
               <input
                 type="file"
-                // className="DocumentFormInput"
+                className="DocumentFormInput"
                 id="certificationDoc"
                 onChange={changeHandler}
                 ref={certificateRef}
